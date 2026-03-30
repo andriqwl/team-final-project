@@ -7,7 +7,9 @@
 @import url('./reset.css');
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  --font-family: "Montserrat Alternates", sans-serif;
+  --second-family: "Inter", sans-serif;
+  --third-family: "Sacramento", sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
