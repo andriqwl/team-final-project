@@ -11,7 +11,7 @@ if (soccerRoot) {
     // CSS
     style.textContent = `
       .sc-wrap{max-width:760px;margin:24px auto;padding:0;background:transparent}
-      .sc-title{margin:0 0 36px;font-size:16px;line-height:normal;font-weight:400;color:#000;text-align:center}
+      .sc-title{margin:0 0 36px;font-family: "Montserrat Alternates", sans-serif;font-size:16px;line-height:normal;font-weight:400;color:#000;text-align:center}
       .sc-field{position:relative;width:100%;max-width:700px;height:320px;margin:0 auto;background:#3b9b49;border:4px solid #000;border-radius:18px;overflow:hidden;cursor:pointer}
       .sc-midline{position:absolute;left:50%;top:0;width:2px;height:100%;background:rgba(255,255,255,.65);transform:translateX(-50%)}
       .sc-circle{position:absolute;left:50%;top:50%;width:90px;height:90px;border:2px solid rgba(255,255,255,.65);border-radius:50%;transform:translate(-50%,-50%)}
