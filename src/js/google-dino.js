@@ -305,7 +305,7 @@
           position: relative;
         }
         #${ROOT_ID} .dino-title{
-          margin: 0 0 36px;
+          margin: 36px 0 36px;
           color: #000;
           font-family: "Montserrat Alternates", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
           font-size: 16px;
@@ -442,7 +442,10 @@
           finishAt: FINISH_AT,
           stopSpawnAt: STOP_SPAWN_AT
         });
-        this.tRex.update(deltaTime, Trex.status.RUNNING);
+        this.tRex.update(
+          deltaTime,
+          this.tRex.ducking ? Trex.status.DUCKING : Trex.status.RUNNING
+        );
         this.distanceRan += slowSpeed * deltaTime;
         this.distanceMeter.update(deltaTime, Math.min(this.distanceRan, FINISH_AT * 100), true);
 
@@ -450,6 +453,9 @@
           this.finishing = false;
           this.finished = true;
           this.activated = false;
+          this.tRex.ducking = false;
+          this.tRex.snapToStartLine();
+          this.tRex.update(0, Trex.status.WAITING);
         }
 
         if (this.statusEl) this.statusEl.hidden = true;
@@ -460,7 +466,7 @@
       if (this.finished) {
         this.horizon.horizonLine.draw();
         for (const c of this.horizon.clouds) c.draw();
-        this.tRex.draw(0, 0);
+        this.tRex.draw(Trex.animFrames[Trex.status.WAITING].frames[0], 0);
         if (this.statusEl) {
           this.statusEl.textContent = 'FINISH — YOU WIN';
           this.statusEl.hidden = false;
@@ -506,7 +512,11 @@
 
         // IMPORTANT: while jumping, Trex should NOT run-run animation frames.
         if (this.tRex.jumping) this.tRex.updateJump(deltaTime, this.currentSpeed);
-        else this.tRex.update(deltaTime, Trex.status.RUNNING);
+        else
+          this.tRex.update(
+            deltaTime,
+            this.tRex.ducking ? Trex.status.DUCKING : Trex.status.RUNNING
+          );
       } else {
         // Waiting/blink when not activated.
         this.tRex.update(deltaTime, this.activated ? Trex.status.RUNNING : Trex.status.WAITING);
@@ -528,6 +538,8 @@
       this.activated = false;
       this.currentSpeed = this.config.SPEED;
       vibrate(200);
+      this.tRex.ducking = false;
+      this.tRex.snapToStartLine();
       this.tRex.update(0, Trex.status.CRASHED);
     },
 
@@ -615,20 +627,31 @@
       // Don't start the game from keyboard globally — only after click/tap in this section.
       if (!this.started) return;
 
-      if (!this.crashed && Runner.keycodes.JUMP[e.keyCode]) {
+      // After crash or finish: same keys as the original restart (space / up / down) + Enter.
+      if (this.crashed || this.finished) {
+        if (
+          Runner.keycodes.RESTART[e.keyCode] ||
+          Runner.keycodes.JUMP[e.keyCode] ||
+          Runner.keycodes.DUCK[e.keyCode]
+        ) {
+          e.preventDefault();
+          this.restart();
+        }
+        return;
+      }
+
+      if (Runner.keycodes.JUMP[e.keyCode]) {
         e.preventDefault();
         if (this.isRunning()) this.tRex.startJump(this.currentSpeed);
-      } else if (!this.crashed && Runner.keycodes.DUCK[e.keyCode]) {
+      } else if (Runner.keycodes.DUCK[e.keyCode]) {
         e.preventDefault();
         if (this.tRex.jumping) this.tRex.setSpeedDrop();
         else this.tRex.setDuck(true);
-      } else if (this.crashed && Runner.keycodes.RESTART[e.keyCode]) {
-        e.preventDefault();
-        this.restart();
       }
     },
 
     onKeyUp_: function (e) {
+      if (this.crashed || this.finished) return;
       if (Runner.keycodes.DUCK[e.keyCode]) {
         e.preventDefault();
         this.tRex.setDuck(false);
@@ -823,7 +846,6 @@
           this.config.HEIGHT
         );
       } else {
-        if (this.ducking && this.status === Trex.status.CRASHED) this.xPos++;
         this.canvasCtx.drawImage(
           Runner.imageSprite,
           sourceX,
@@ -881,7 +903,7 @@
       if (this.yPos < this.config.MAX_JUMP_HEIGHT || this.speedDrop) this.endJump();
 
       if (this.yPos > this.groundYPos) {
-        this.reset();
+        this.landOnGround_();
         this.jumpCount++;
       }
 
@@ -903,13 +925,28 @@
       }
     },
 
-    reset: function () {
+    snapToStartLine: function () {
+      this.xPos = this.config.START_X_POS;
+      this.yPos = this.groundYPos;
+      this.jumping = false;
+      this.jumpVelocity = 0;
+      this.speedDrop = false;
+    },
+
+    landOnGround_: function () {
       this.yPos = this.groundYPos;
       this.jumpVelocity = 0;
       this.jumping = false;
       this.ducking = false;
       this.update(0, Trex.status.RUNNING);
       this.speedDrop = false;
+      this.jumpCount = 0;
+    },
+
+    reset: function () {
+      this.snapToStartLine();
+      this.ducking = false;
+      this.update(0, Trex.status.RUNNING);
       this.jumpCount = 0;
     }
   };
