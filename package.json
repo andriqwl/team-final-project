@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tate-t.github.io/team-final-project/",
+  "homepage": "https://andriqwl.github.io/team-final-project/",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/team-final-project/",
