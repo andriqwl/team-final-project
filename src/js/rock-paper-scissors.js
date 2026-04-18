@@ -6,9 +6,9 @@ let playerScore = 0;
 let computerScore = 0;
 
 const icons = {
-  rock: '../img/stone.png',
-  paper: '../img/paper.png',
-  scissors: '../img/scissors.png',
+  rock: 'img/stone.png',
+  paper: 'img/paper.png',
+  scissors: 'img/scissors.png',
 };
 
 const container = document.createElement('div');
