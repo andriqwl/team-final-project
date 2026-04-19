@@ -17,11 +17,8 @@ dividerH1.style.height = '0';
 dividerH1.style.borderTop = '1px solid #000';
 dividerH1.style.margin = '36px auto 0';
 
-// Знаходимо секцію hero
 const heroSection = document.querySelector('.hero');
 
-// Вставляємо h1 відразу після неї
 heroSection.after(h1);
 
-// Вставляємо розділювач відразу після h1
 h1.after(dividerH1);
