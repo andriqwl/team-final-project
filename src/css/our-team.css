@@ -48,15 +48,26 @@
   border-radius: 3px;
   background-color: #d9d9d9;
 }
+
+.line-item.hovered {
+  border-radius: 3px;
+  width: 30px;
+  height: 3px;
+  background: #797979;
+}
 .team-button--l {
   position: absolute;
+  left: 100px;
+  top: 100px;
 }
 .team-button--r {
   position: absolute;
+  right: 100px;
+  top: 100px;
 }
 
-.team-svg--l{
-    width: 150px;
-    height: 75px;
-    fill: #000;
+.team-svg--l {
+  width: 150px;
+  height: 75px;
+  fill: #000;
 }
