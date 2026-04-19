@@ -20,6 +20,7 @@ import './css/styles.css';
 
 // 2. Секції (додаємо /js/ у шлях, бо вони всередині папки js)
 import './js/header.js';
+import './js/modal.js';
 import './js/h1.js';
 import './js/guess-number.js';
 import './js/rock-paper-scissors.js';

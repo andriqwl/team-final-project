@@ -5,10 +5,26 @@ const choices = ['rock', 'scissors', 'paper'];
 let playerScore = 0;
 let computerScore = 0;
 
+// import rock from '../img/stone.png';
+// import paper from '../img/paper.png';
+// import scissors from '../img/scissors.png';
+
+// const icons = {
+//   rock,
+//   paper,
+//   scissors,
+//   // rock: '/img/stone.png',
+//   // paper: '/img/paper.png',
+//   // scissors: '/img/scissors.png',
+// };
+import rock from '../img/stone.png';
+import paper from '../img/paper.png';
+import scissors from '../img/scissors.png';
+
 const icons = {
-  rock: 'img/stone.png',
-  paper: 'img/paper.png',
-  scissors: 'img/scissors.png',
+  rock,
+  paper,
+  scissors,
 };
 
 const container = document.createElement('div');
@@ -17,7 +33,6 @@ container.style.maxWidth = '800px';
 container.style.margin = '0 auto';
 container.style.padding = '20px';
 container.style.paddingBottom = '0';
-
 
 const title = document.createElement('h1');
 title.textContent = 'Камінь - ножиці - папір';
@@ -60,6 +75,7 @@ choices.forEach(choice => {
   img.src = icons[choice];
   img.style.width = '70%';
   img.style.height = 'auto';
+  console.log(img);
   btn.appendChild(img);
   btn.onclick = () => playRound(choice);
   btnContainer.appendChild(btn);
@@ -159,6 +175,5 @@ dividerr.style.width = '536px';
 dividerr.style.height = '0';
 dividerr.style.borderTop = '1px solid #000';
 dividerr.style.margin = '36px auto 0';
-
 
 root.appendChild(dividerr);

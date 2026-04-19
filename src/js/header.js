@@ -3,16 +3,12 @@ const headerRoot = document.getElementById('header-root');
 const sections = [
   { name: 'Перевірка року', href: '#super-section' },
   { name: 'Google Динозавр', href: '#google-dino-root' },
-
   { name: 'Вгадай число', href: '#guess-number-root' },
   { name: 'Футбол', href: '#soccer-root' },
-
   { name: 'Камінь, ножиці, папір', href: '#rock-paper-scissors-root' },
   { name: 'Введіть 3 числа', href: '#three-numbers-root' },
-
   { name: 'Калькулятор', href: '#calc-root' },
   { name: 'Наша команда', href: '#our-team-root' },
-
   { name: 'Калькулятор часу', href: '#time-calc-root' },
   { name: 'Обери вченого', href: '#choose-scientist-root' },
 ];
@@ -45,7 +41,7 @@ logoIcon.innerHTML = `<svg width="40" height="34" viewBox="0 0 45 38" fill="none
 logoBox.appendChild(logoIcon);
 
 const logoText = document.createElement('div');
-logoText.innerHTML = `<div style="font-size: 18px; font-weight: 600; color: #333; line-height: 1;">Coding</div><div style="font-family: 'Sacramento', cursive; font-size: 16px; color: #666; margin-left: 10px;">Magic</div>`;
+logoText.innerHTML = `<div style="font-size: 18px; font-weight: 600; color: #333; line-height: 1; transition: 0.3s;">Coding</div><div style="font-family: 'Sacramento', cursive; font-size: 16px; color: #666; margin-left: 10px;">Magic</div>`;
 logoBox.appendChild(logoText);
 
 const navElement = document.createElement('nav');
@@ -85,7 +81,8 @@ sections.forEach(sec => {
     transition: 0.3s;
     display: block;
   `;
-  link.onmouseover = () => (link.style.background = '#f4f4f4');
+  link.onmouseover = () =>
+    (link.style.background = isDarkMode ? '#2d2d2d' : '#f4f4f4');
   link.onmouseout = () => (link.style.background = 'transparent');
   link.onclick = () => toggleMenu(false);
   dropdown.appendChild(link);
@@ -160,34 +157,59 @@ circle.textContent = '☀️';
 themeToggle.appendChild(circle);
 
 const greeting = document.createElement('span');
-greeting.textContent = 'Вітаємо, User!';
+greeting.id = 'user-greeting';
+const storedName = localStorage.getItem('userName') || 'User';
+greeting.textContent = `Вітаємо, ${storedName}!`;
 greeting.style.cssText = `font-size: 14px; font-weight: 500; color: #333; transition: 0.3s;`;
 
 rightBox.append(themeToggle, greeting);
 
 let isDarkMode = false;
+
 themeToggle.onclick = () => {
   isDarkMode = !isDarkMode;
+  applyTheme();
+  localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+};
+
+function applyTheme() {
+  const textColor = isDarkMode ? '#fff' : '#333';
+  const bgColor = isDarkMode ? '#121212' : '#fff';
+  const borderColor = isDarkMode ? '#222' : '#e0e0e0';
+
+  document.documentElement.style.setProperty('--main-text', textColor);
+  document.documentElement.style.setProperty('--main-bg', bgColor);
+  document.documentElement.style.setProperty(
+    '--secondary-bg',
+    isDarkMode ? '#1e1e1e' : '#f4f4f4'
+  );
+
   circle.style.left = isDarkMode ? '26px' : '2px';
   circle.textContent = isDarkMode ? '🌙' : '☀️';
   themeToggle.style.backgroundColor = isDarkMode ? '#4a90e2' : '#8a8a8a';
-  headerElement.style.backgroundColor = isDarkMode ? '#121212' : '#fff';
-  headerElement.style.borderBottomColor = isDarkMode ? '#222' : '#e0e0e0';
+  headerElement.style.backgroundColor = bgColor;
+  headerElement.style.borderBottomColor = borderColor;
 
-  const textColor = isDarkMode ? '#fff' : '#333';
   greeting.style.color = textColor;
   dropdown.style.backgroundColor = isDarkMode ? '#1e1e1e' : '#fff';
   dropdown.style.borderColor = isDarkMode ? '#333' : '#e0e0e0';
 
   navElement.querySelectorAll('a').forEach(link => {
     link.style.color = textColor;
-    link.onmouseover = () =>
-      (link.style.background = isDarkMode ? '#2d2d2d' : '#f4f4f4');
-    link.onmouseout = () => (link.style.background = 'transparent');
+  });
+
+  navElement.querySelectorAll('span svg').forEach(svg => {
+    svg.style.color = textColor;
   });
 
   logoText.querySelector('div').style.color = textColor;
   logoIcon
     .querySelectorAll('path')
     .forEach(p => p.setAttribute('stroke', textColor));
-};
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  isDarkMode = true;
+  applyTheme();
+}
