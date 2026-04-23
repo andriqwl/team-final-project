@@ -6,6 +6,12 @@
   root.style.display = 'flex';
   root.style.flexDirection = 'column';
   root.style.alignItems = 'center';
+  root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Білий прозорий фон
+  root.style.borderRadius = '30px';
+  root.style.margin = '20px auto 50px auto';
+  root.style.paddingBottom = '40px';
+  root.style.maxWidth = '1100px';
+  root.style.backdropFilter = 'blur(10px)';
 
   const spinnerStyle = document.createElement('style');
   spinnerStyle.textContent =

@@ -5,11 +5,12 @@
   |============================
 */
 @import url('./reset.css');
-@import url("./our-team.css");
+@import url('./background.css');
+@import url('./our-team.css');
 :root {
-  --font-family: "Montserrat Alternates", sans-serif;
-  --second-family: "Inter", sans-serif;
-  --third-family: "Sacramento", sans-serif;
+  --font-family: 'Montserrat Alternates', sans-serif;
+  --second-family: 'Inter', sans-serif;
+  --third-family: 'Sacramento', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
