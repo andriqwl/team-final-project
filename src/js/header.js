@@ -176,6 +176,33 @@ function applyTheme() {
   const textColor = isDarkMode ? '#fff' : '#333';
   const bgColor = isDarkMode ? '#121212' : '#fff';
   const borderColor = isDarkMode ? '#222' : '#e0e0e0';
+  const mainTitle = document.getElementById('main-title');
+  const mainDivider = document.getElementById('main-divider');
+  const containerBg = isDarkMode ? '#000' : 'rgba(255, 255, 255, 0.85)';
+  document.documentElement.style.setProperty(
+    '--main-container-bg',
+    containerBg
+  );
+  document.documentElement.style.setProperty('--main-text', textColor);
+  document.documentElement.style.setProperty('--main-bg', bgColor);
+
+  const containerShadow = isDarkMode
+    ? '0 0 50px rgba(255, 255, 255, 0.05)'
+    : '0 0 50px rgba(0, 0, 0, 0.1)';
+  document.documentElement.style.setProperty(
+    '--main-container-shadow',
+    containerShadow
+  );
+  if (mainTitle) {
+    mainTitle.style.color = textColor;
+  }
+
+  if (mainDivider) {
+    // Якщо темно — лінія світла, якщо світло — лінія чорна
+    mainDivider.style.borderTopColor = isDarkMode
+      ? 'rgba(255, 255, 255, 0.4)'
+      : '#000';
+  }
 
   document.documentElement.style.setProperty('--main-text', textColor);
   document.documentElement.style.setProperty('--main-bg', bgColor);

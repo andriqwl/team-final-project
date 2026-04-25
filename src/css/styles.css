@@ -7,10 +7,16 @@
 @import url('./reset.css');
 @import url("./our-team.css");
 @import url("./footer.css");
+@import url('./container.css');
+@import url('./our-team.css');
+@import url('./choose-scientist.css');
+@import url('./guess-number.css');
+@import url('./background.css');
+
 :root {
-  --font-family: "Montserrat Alternates", sans-serif;
-  --second-family: "Inter", sans-serif;
-  --third-family: "Sacramento", sans-serif;
+  --font-family: 'Montserrat Alternates', sans-serif;
+  --second-family: 'Inter', sans-serif;
+  --third-family: 'Sacramento', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
