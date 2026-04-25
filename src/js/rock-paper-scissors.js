@@ -1,6 +1,15 @@
 //Тут пишіть свій скрипт
 
 const root = document.getElementById('rock-paper-scissors-root');
+root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Наш "скляний" фон
+root.style.borderRadius = '30px';
+root.style.margin = '20px auto 50px auto';
+root.style.padding = '40px 0'; // Внутрішні відступи
+root.style.maxWidth = '1100px';
+root.style.backdropFilter = 'blur(10px)';
+root.style.display = 'flex';
+root.style.flexDirection = 'column';
+root.style.alignItems = 'center';
 const choices = ['rock', 'scissors', 'paper'];
 let playerScore = 0;
 let computerScore = 0;
