@@ -9,7 +9,7 @@ if (guessNumberRoot) {
         flex-direction: column;
         align-items: center;
         padding: 30px 0;
-        font-family: 'Montserrat', sans-serif;
+        // font-family: 'Montserrat', sans-serif;
         width: 100%;
     `;
 
