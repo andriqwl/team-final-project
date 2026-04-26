@@ -119,7 +119,6 @@ subscribeBox.appendChild(noteText);
     `;
   document.head.appendChild(styleEl);
 
-  // Створення елементів модалки
   const overlay = document.createElement('div');
   overlay.className = 'sub-overlay';
 
@@ -159,7 +158,6 @@ subscribeBox.appendChild(noteText);
   modal.appendChild(modalTitle);
   overlay.appendChild(modal);
 
-  // Функції керування модалкою
   function openSubModal() {
     document.body.appendChild(overlay);
     setTimeout(() => {
@@ -176,18 +174,15 @@ subscribeBox.appendChild(noteText);
     }, 600);
   }
 
-  // Закриття при кліку на фон
   overlay.onclick = e => {
     if (e.target === overlay) closeSubModal();
   };
 
-  // Обробник натискання кнопки
   const triggerBtn = document.getElementById('footer-sub-btn');
   if (triggerBtn) {
     triggerBtn.addEventListener('click', e => {
       e.preventDefault();
 
-      // Проста валідація
       const emailValue = emailInput.value.trim();
       if (!emailValue || !emailValue.includes('@')) {
         alert('Будь ласка, введіть коректну електронну адресу');
@@ -195,7 +190,7 @@ subscribeBox.appendChild(noteText);
       }
 
       openSubModal();
-      emailInput.value = ''; // Очищення поля
+      emailInput.value = '';
     });
   }
 })();

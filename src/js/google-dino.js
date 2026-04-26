@@ -4,12 +4,12 @@
   'use strict';
 
   const ROOT_ID = 'google-dino-root';
-  const SPRITE_1X = 'https://wayou.github.io/t-rex-runner/assets/default_100_percent/100-offline-sprite.png';
-  const SPRITE_2X = 'https://wayou.github.io/t-rex-runner/assets/default_200_percent/200-offline-sprite.png';
+  const SPRITE_1X =
+    'https://wayou.github.io/t-rex-runner/assets/default_100_percent/100-offline-sprite.png';
+  const SPRITE_2X =
+    'https://wayou.github.io/t-rex-runner/assets/default_200_percent/200-offline-sprite.png';
 
   const FPS = 60;
-  // Match the "football field" width from the next section (soccer).
-  // Soccer field max-width is 700px, so we expand Dino field to 700px too.
   const DEFAULT_WIDTH = 700;
   const IS_HIDPI = window.devicePixelRatio > 1;
   const IS_IOS =
@@ -36,7 +36,8 @@
   }
 
   function vibrate(duration) {
-    if (IS_MOBILE && window.navigator.vibrate) window.navigator.vibrate(duration);
+    if (IS_MOBILE && window.navigator.vibrate)
+      window.navigator.vibrate(duration);
   }
 
   // ---------- Collision (axis-aligned boxes) ----------
@@ -77,16 +78,32 @@
 
     for (let i = 0; i < tRexBox.length; i++) {
       for (let j = 0; j < obBox.length; j++) {
-        const adjTrexBox = createAdjustedCollisionBox(tRexBox[i], { x: tRexX, y: tRexY });
-        const adjObsBox = createAdjustedCollisionBox(obBox[j], { x: obstacleX, y: obstacleY });
+        const adjTrexBox = createAdjustedCollisionBox(tRexBox[i], {
+          x: tRexX,
+          y: tRexY,
+        });
+        const adjObsBox = createAdjustedCollisionBox(obBox[j], {
+          x: obstacleX,
+          y: obstacleY,
+        });
 
         if (getBoxCompare(adjTrexBox, adjObsBox)) {
           if (opt_canvasCtx) {
             // Debug draw
             opt_canvasCtx.save();
             opt_canvasCtx.strokeStyle = 'rgba(255,0,0,.35)';
-            opt_canvasCtx.strokeRect(adjTrexBox.x, adjTrexBox.y, adjTrexBox.width, adjTrexBox.height);
-            opt_canvasCtx.strokeRect(adjObsBox.x, adjObsBox.y, adjObsBox.width, adjObsBox.height);
+            opt_canvasCtx.strokeRect(
+              adjTrexBox.x,
+              adjTrexBox.y,
+              adjTrexBox.width,
+              adjTrexBox.height
+            );
+            opt_canvasCtx.strokeRect(
+              adjObsBox.x,
+              adjObsBox.y,
+              adjObsBox.width,
+              adjObsBox.height
+            );
             opt_canvasCtx.restore();
           }
           return [adjTrexBox, adjObsBox];
@@ -149,7 +166,7 @@
     MIN_JUMP_HEIGHT: 35,
     MOBILE_SPEED_COEFFICIENT: 1.2,
     SPEED: 6,
-    SPEED_DROP_COEFFICIENT: 3
+    SPEED_DROP_COEFFICIENT: 3,
   };
 
   Runner.defaultDimensions = { WIDTH: DEFAULT_WIDTH, HEIGHT: 150 };
@@ -165,7 +182,7 @@
       RESTART: { x: 2, y: 2 },
       TEXT_SPRITE: { x: 655, y: 2 },
       TREX: { x: 848, y: 2 },
-      STAR: { x: 645, y: 2 }
+      STAR: { x: 645, y: 2 },
     },
     HDPI: {
       CACTUS_LARGE: { x: 652, y: 2 },
@@ -177,14 +194,14 @@
       RESTART: { x: 2, y: 2 },
       TEXT_SPRITE: { x: 1294, y: 2 },
       TREX: { x: 1678, y: 2 },
-      STAR: { x: 1276, y: 2 }
-    }
+      STAR: { x: 1276, y: 2 },
+    },
   };
 
   Runner.keycodes = {
     JUMP: { 38: 1, 32: 1 }, // Up, Space
     DUCK: { 40: 1 }, // Down
-    RESTART: { 13: 1 } // Enter
+    RESTART: { 13: 1 }, // Enter
   };
 
   Runner.events = {
@@ -198,7 +215,7 @@
     VISIBILITY: 'visibilitychange',
     BLUR: 'blur',
     FOCUS: 'focus',
-    LOAD: 'load'
+    LOAD: 'load',
   };
 
   Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
@@ -235,7 +252,9 @@
       img.id = IS_HIDPI ? 'offline-resources-2x' : 'offline-resources-1x';
       img.src = IS_HIDPI ? SPRITE_2X : SPRITE_1X;
       Runner.imageSprite = img;
-      this.spriteDef = IS_HIDPI ? Runner.spriteDefinition.HDPI : Runner.spriteDefinition.LDPI;
+      this.spriteDef = IS_HIDPI
+        ? Runner.spriteDefinition.HDPI
+        : Runner.spriteDefinition.LDPI;
 
       img.addEventListener(Runner.events.LOAD, () => this.init());
       // Append hidden so browser keeps it alive.
@@ -257,15 +276,32 @@
       title.textContent = 'Google динозавр';
       this.containerEl.appendChild(title);
 
-      // Canvas
-      this.canvas = createCanvas(this.containerEl, this.dimensions.WIDTH, this.dimensions.HEIGHT, 'runner-canvas');
+      this.canvas = createCanvas(
+        this.containerEl,
+        this.dimensions.WIDTH,
+        this.dimensions.HEIGHT,
+        'runner-canvas'
+      );
       this.canvasCtx = this.canvas.getContext('2d');
-      this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH, this.dimensions.HEIGHT);
+      this.canvasCtx.clearRect(
+        0,
+        0,
+        this.dimensions.WIDTH,
+        this.dimensions.HEIGHT
+      );
       Runner.updateCanvasScaling(this.canvas);
 
-      this.horizon = new Horizon(this.canvas, this.spriteDef, this.dimensions, this.config.GAP_COEFFICIENT);
-      // Score digits removed from UI (we still track distance internally).
-      this.distanceMeter = new DistanceMeter(this.canvas, this.spriteDef.TEXT_SPRITE, this.dimensions.WIDTH);
+      this.horizon = new Horizon(
+        this.canvas,
+        this.spriteDef,
+        this.dimensions,
+        this.config.GAP_COEFFICIENT
+      );
+      this.distanceMeter = new DistanceMeter(
+        this.canvas,
+        this.spriteDef.TEXT_SPRITE,
+        this.dimensions.WIDTH
+      );
       this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
       this.gameOverPanel = new GameOverPanel(
         this.canvas,
@@ -351,7 +387,10 @@
     },
 
     adjustDimensions: function () {
-      const width = Math.min(DEFAULT_WIDTH, this.outerContainerEl.clientWidth || DEFAULT_WIDTH);
+      const width = Math.min(
+        DEFAULT_WIDTH,
+        this.outerContainerEl.clientWidth || DEFAULT_WIDTH
+      );
       this.dimensions.WIDTH = width;
       this.dimensions.HEIGHT = Runner.defaultDimensions.HEIGHT;
     },
@@ -359,7 +398,9 @@
     setSpeed: function (opt_speed) {
       const speed = opt_speed || this.currentSpeed;
       if (this.dimensions.WIDTH < DEFAULT_WIDTH) {
-        const mobileSpeed = (speed * this.dimensions.WIDTH) / DEFAULT_WIDTH * this.config.MOBILE_SPEED_COEFFICIENT;
+        const mobileSpeed =
+          ((speed * this.dimensions.WIDTH) / DEFAULT_WIDTH) *
+          this.config.MOBILE_SPEED_COEFFICIENT;
         this.currentSpeed = mobileSpeed > speed ? speed : mobileSpeed;
       } else if (opt_speed) {
         this.currentSpeed = opt_speed;
@@ -373,7 +414,12 @@
     },
 
     clearCanvas: function () {
-      this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH, this.dimensions.HEIGHT);
+      this.canvasCtx.clearRect(
+        0,
+        0,
+        this.dimensions.WIDTH,
+        this.dimensions.HEIGHT
+      );
     },
 
     isRunning: function () {
@@ -413,7 +459,8 @@
       const FINISH_AT = 10000;
       const STOP_SPAWN_AT = 9900;
       const approachingFinish = distanceMeters >= STOP_SPAWN_AT;
-      const canSpawnObstacles = !approachingFinish && !this.finishing && !this.finished;
+      const canSpawnObstacles =
+        !approachingFinish && !this.finishing && !this.finished;
 
       // Mark the finish as crossed as soon as the meter reaches the target.
       if (!this.finishCrossed && distanceMeters >= FINISH_AT) {
@@ -424,8 +471,14 @@
       const cappedDistanceMeters = Math.floor(cappedDistanceRan / 100);
 
       // Start the final “roll” only after the T-Rex is on the ground.
-      const trexOnGround = !this.tRex.jumping && this.tRex.yPos === this.tRex.groundYPos;
-      if (this.finishCrossed && !this.finishing && !this.finished && trexOnGround) {
+      const trexOnGround =
+        !this.tRex.jumping && this.tRex.yPos === this.tRex.groundYPos;
+      if (
+        this.finishCrossed &&
+        !this.finishing &&
+        !this.finished &&
+        trexOnGround
+      ) {
         this.finishing = true;
         this.finishTarget = FINISH_AT;
         this.finishRollStart = now;
@@ -440,14 +493,18 @@
 
         this.horizon.update(deltaTime, slowSpeed, cappedDistanceMeters, false, {
           finishAt: FINISH_AT,
-          stopSpawnAt: STOP_SPAWN_AT
+          stopSpawnAt: STOP_SPAWN_AT,
         });
         this.tRex.update(
           deltaTime,
           this.tRex.ducking ? Trex.status.DUCKING : Trex.status.RUNNING
         );
         this.distanceRan += slowSpeed * deltaTime;
-        this.distanceMeter.update(deltaTime, Math.min(this.distanceRan, FINISH_AT * 100), true);
+        this.distanceMeter.update(
+          deltaTime,
+          Math.min(this.distanceRan, FINISH_AT * 100),
+          true
+        );
 
         if (elapsed >= rollMs) {
           this.finishing = false;
@@ -496,14 +553,25 @@
         this.runningTime += deltaTime;
         // Accelerate a bit more noticeably after the run starts.
         this.currentSpeed += this.config.ACCELERATION * 1.6;
-        if (this.currentSpeed > this.config.MAX_SPEED) this.currentSpeed = this.config.MAX_SPEED;
+        if (this.currentSpeed > this.config.MAX_SPEED)
+          this.currentSpeed = this.config.MAX_SPEED;
 
-        const hasCollision = this.horizon.update(deltaTime, this.currentSpeed, cappedDistanceMeters, canSpawnObstacles, {
-          finishAt: FINISH_AT,
-          stopSpawnAt: STOP_SPAWN_AT
-        });
+        const hasCollision = this.horizon.update(
+          deltaTime,
+          this.currentSpeed,
+          cappedDistanceMeters,
+          canSpawnObstacles,
+          {
+            finishAt: FINISH_AT,
+            stopSpawnAt: STOP_SPAWN_AT,
+          }
+        );
         this.distanceRan += this.currentSpeed * deltaTime;
-        this.distanceMeter.update(deltaTime, Math.min(this.distanceRan, FINISH_AT * 100), this.activated);
+        this.distanceMeter.update(
+          deltaTime,
+          Math.min(this.distanceRan, FINISH_AT * 100),
+          this.activated
+        );
 
         if (hasCollision) {
           const collision = checkForCollision(hasCollision, this.tRex);
@@ -511,7 +579,8 @@
         }
 
         // IMPORTANT: while jumping, Trex should NOT run-run animation frames.
-        if (this.tRex.jumping) this.tRex.updateJump(deltaTime, this.currentSpeed);
+        if (this.tRex.jumping)
+          this.tRex.updateJump(deltaTime, this.currentSpeed);
         else
           this.tRex.update(
             deltaTime,
@@ -519,12 +588,25 @@
           );
       } else {
         // Waiting/blink when not activated.
-        this.tRex.update(deltaTime, this.activated ? Trex.status.RUNNING : Trex.status.WAITING);
-        this.horizon.update(deltaTime, this.currentSpeed, cappedDistanceMeters, canSpawnObstacles, {
-          finishAt: FINISH_AT,
-          stopSpawnAt: STOP_SPAWN_AT
-        });
-        this.distanceMeter.update(deltaTime, Math.min(this.distanceRan, FINISH_AT * 100), this.activated);
+        this.tRex.update(
+          deltaTime,
+          this.activated ? Trex.status.RUNNING : Trex.status.WAITING
+        );
+        this.horizon.update(
+          deltaTime,
+          this.currentSpeed,
+          cappedDistanceMeters,
+          canSpawnObstacles,
+          {
+            finishAt: FINISH_AT,
+            stopSpawnAt: STOP_SPAWN_AT,
+          }
+        );
+        this.distanceMeter.update(
+          deltaTime,
+          Math.min(this.distanceRan, FINISH_AT * 100),
+          this.activated
+        );
       }
 
       if (this.crashed) this.gameOverPanel.draw();
@@ -579,14 +661,30 @@
       window.addEventListener(Runner.events.KEYDOWN, this.onKeyDown);
       window.addEventListener(Runner.events.KEYUP, this.onKeyUp);
       if (IS_TOUCH_ENABLED) {
-        this.outerContainerEl.addEventListener(Runner.events.TOUCHSTART, this.onTouchStart, { passive: false });
-        this.outerContainerEl.addEventListener(Runner.events.TOUCHEND, this.onTouchEnd);
+        this.outerContainerEl.addEventListener(
+          Runner.events.TOUCHSTART,
+          this.onTouchStart,
+          { passive: false }
+        );
+        this.outerContainerEl.addEventListener(
+          Runner.events.TOUCHEND,
+          this.onTouchEnd
+        );
       } else {
-        this.outerContainerEl.addEventListener(Runner.events.MOUSEDOWN, this.onMouseDown);
-        this.outerContainerEl.addEventListener(Runner.events.MOUSEUP, this.onMouseUp);
+        this.outerContainerEl.addEventListener(
+          Runner.events.MOUSEDOWN,
+          this.onMouseDown
+        );
+        this.outerContainerEl.addEventListener(
+          Runner.events.MOUSEUP,
+          this.onMouseUp
+        );
       }
       window.addEventListener(Runner.events.RESIZE, this.onResize);
-      document.addEventListener(Runner.events.VISIBILITY, this.onVisibilityChange);
+      document.addEventListener(
+        Runner.events.VISIBILITY,
+        this.onVisibilityChange
+      );
       window.addEventListener(Runner.events.BLUR, this.onBlur);
       window.addEventListener(Runner.events.FOCUS, this.onFocus);
     },
@@ -667,9 +765,7 @@
       else this.tRex.startJump(this.currentSpeed);
     },
 
-    onPointerUp_: function () {
-      // no-op (original uses it to end press)
-    },
+    onPointerUp_: function () {},
 
     onResize_: function () {
       clearTimeout(this.resizeTimerId_);
@@ -679,12 +775,16 @@
         if (this.dimensions.WIDTH !== oldW) {
           this.canvas.width = this.dimensions.WIDTH;
           this.canvas.height = this.dimensions.HEIGHT;
-          Runner.updateCanvasScaling(this.canvas, this.dimensions.WIDTH, this.dimensions.HEIGHT);
+          Runner.updateCanvasScaling(
+            this.canvas,
+            this.dimensions.WIDTH,
+            this.dimensions.HEIGHT
+          );
           this.horizon.resize(this.dimensions.WIDTH, this.dimensions.HEIGHT);
           this.distanceMeter.resize(this.dimensions.WIDTH);
         }
       }, 250);
-    }
+    },
   };
 
   // ---------- Trex ----------
@@ -733,7 +833,7 @@
     SPRITE_WIDTH: 262,
     START_X_POS: 50,
     WIDTH: 44,
-    WIDTH_DUCK: 59
+    WIDTH_DUCK: 59,
   };
 
   Trex.collisionBoxes = {
@@ -744,8 +844,8 @@
       new CollisionBox(10, 35, 14, 8),
       new CollisionBox(1, 24, 29, 5),
       new CollisionBox(5, 30, 21, 4),
-      new CollisionBox(9, 34, 15, 4)
-    ]
+      new CollisionBox(9, 34, 15, 4),
+    ],
   };
 
   Trex.status = {
@@ -753,7 +853,7 @@
     DUCKING: 'DUCKING',
     JUMPING: 'JUMPING',
     RUNNING: 'RUNNING',
-    WAITING: 'WAITING'
+    WAITING: 'WAITING',
   };
 
   Trex.BLINK_TIMING = 7000;
@@ -764,13 +864,16 @@
     RUNNING: { frames: [88, 132], msPerFrame: 1000 / 6 },
     CRASHED: { frames: [220], msPerFrame: 1000 / 60 },
     JUMPING: { frames: [0], msPerFrame: 1000 / 60 },
-    DUCKING: { frames: [262, 321], msPerFrame: 1000 / 8 }
+    DUCKING: { frames: [262, 321], msPerFrame: 1000 / 8 },
   };
 
   Trex.prototype = {
     init: function () {
       this.blinkDelay = this.setBlinkDelay();
-      this.groundYPos = Runner.defaultDimensions.HEIGHT - this.config.HEIGHT - Runner.config.BOTTOM_PAD;
+      this.groundYPos =
+        Runner.defaultDimensions.HEIGHT -
+        this.config.HEIGHT -
+        Runner.config.BOTTOM_PAD;
       this.yPos = this.groundYPos;
       // Fix: ensure Trex is visible immediately (same as original).
       this.xPos = this.config.START_X_POS;
@@ -807,7 +910,9 @@
 
       if (this.timer >= this.msPerFrame) {
         this.currentFrame =
-          this.currentFrame === this.currentAnimFrames.length - 1 ? 0 : this.currentFrame + 1;
+          this.currentFrame === this.currentAnimFrames.length - 1
+            ? 0
+            : this.currentFrame + 1;
         this.timer = 0;
       }
 
@@ -820,7 +925,10 @@
     draw: function (x, y) {
       let sourceX = x;
       let sourceY = y;
-      let sourceWidth = this.ducking && this.status !== Trex.status.CRASHED ? this.config.WIDTH_DUCK : this.config.WIDTH;
+      let sourceWidth =
+        this.ducking && this.status !== Trex.status.CRASHED
+          ? this.config.WIDTH_DUCK
+          : this.config.WIDTH;
       let sourceHeight = this.config.HEIGHT;
 
       if (IS_HIDPI) {
@@ -882,7 +990,10 @@
     },
 
     endJump: function () {
-      if (this.reachedMinHeight && this.jumpVelocity < this.config.DROP_VELOCITY) {
+      if (
+        this.reachedMinHeight &&
+        this.jumpVelocity < this.config.DROP_VELOCITY
+      ) {
         this.jumpVelocity = this.config.DROP_VELOCITY;
       }
     },
@@ -892,15 +1003,19 @@
       const framesElapsed = deltaTime / msPerFrame;
 
       if (this.speedDrop) {
-        this.yPos += Math.round(this.jumpVelocity * this.config.SPEED_DROP_COEFFICIENT * framesElapsed);
+        this.yPos += Math.round(
+          this.jumpVelocity * this.config.SPEED_DROP_COEFFICIENT * framesElapsed
+        );
       } else {
         this.yPos += Math.round(this.jumpVelocity * framesElapsed);
       }
 
       this.jumpVelocity += this.config.GRAVITY * framesElapsed;
 
-      if (this.yPos < this.minJumpHeight || this.speedDrop) this.reachedMinHeight = true;
-      if (this.yPos < this.config.MAX_JUMP_HEIGHT || this.speedDrop) this.endJump();
+      if (this.yPos < this.minJumpHeight || this.speedDrop)
+        this.reachedMinHeight = true;
+      if (this.yPos < this.config.MAX_JUMP_HEIGHT || this.speedDrop)
+        this.endJump();
 
       if (this.yPos > this.groundYPos) {
         this.landOnGround_();
@@ -948,13 +1063,15 @@
       this.ducking = false;
       this.update(0, Trex.status.RUNNING);
       this.jumpCount = 0;
-    }
+    },
   };
 
   Object.defineProperty(Trex.prototype, 'collisionBoxes', {
     get: function () {
-      return this.ducking ? Trex.collisionBoxes.DUCKING : Trex.collisionBoxes.RUNNING;
-    }
+      return this.ducking
+        ? Trex.collisionBoxes.DUCKING
+        : Trex.collisionBoxes.RUNNING;
+    },
   });
 
   // ---------- Horizon / Obstacles / Clouds ----------
@@ -969,12 +1086,25 @@
     this.init();
   }
 
-  Cloud.config = { HEIGHT: 14, MAX_CLOUD_GAP: 400, MAX_SKY_LEVEL: 30, MIN_CLOUD_GAP: 100, MIN_SKY_LEVEL: 71, WIDTH: 46 };
+  Cloud.config = {
+    HEIGHT: 14,
+    MAX_CLOUD_GAP: 400,
+    MAX_SKY_LEVEL: 30,
+    MIN_CLOUD_GAP: 100,
+    MIN_SKY_LEVEL: 71,
+    WIDTH: 46,
+  };
 
   Cloud.prototype = {
     init: function () {
-      this.yPos = getRandomNum(Cloud.config.MAX_SKY_LEVEL, Cloud.config.MIN_SKY_LEVEL);
-      this.cloudGap = getRandomNum(Cloud.config.MIN_CLOUD_GAP, Cloud.config.MAX_CLOUD_GAP);
+      this.yPos = getRandomNum(
+        Cloud.config.MAX_SKY_LEVEL,
+        Cloud.config.MIN_SKY_LEVEL
+      );
+      this.cloudGap = getRandomNum(
+        Cloud.config.MIN_CLOUD_GAP,
+        Cloud.config.MAX_CLOUD_GAP
+      );
       this.draw();
     },
     draw: function () {
@@ -996,22 +1126,33 @@
     },
     isVisible: function () {
       return this.xPos + Cloud.config.WIDTH > 0;
-    }
+    },
   };
 
-  function Obstacle(canvasCtx, type, spriteImgPos, dimensions, gapCoefficient, speed, distanceMeters, opt) {
+  function Obstacle(
+    canvasCtx,
+    type,
+    spriteImgPos,
+    dimensions,
+    gapCoefficient,
+    speed,
+    distanceMeters,
+    opt
+  ) {
     this.canvasCtx = canvasCtx;
     this.typeConfig = type;
     this.spritePos = spriteImgPos;
     this.dimensions = dimensions;
     this.gapCoefficient = gapCoefficient;
     this.distanceMeters = distanceMeters || 0;
-    this.xPos = (opt && typeof opt.xPos === 'number') ? opt.xPos : dimensions.WIDTH;
+    this.xPos =
+      opt && typeof opt.xPos === 'number' ? opt.xPos : dimensions.WIDTH;
     this.yPos = 0;
     this.width = 0;
     this.height = 0;
     this.gap = 0;
-    this.gapOverride = opt && typeof opt.gapOverride === 'number' ? opt.gapOverride : null;
+    this.gapOverride =
+      opt && typeof opt.gapOverride === 'number' ? opt.gapOverride : null;
     this.collisionBoxes = [];
     this.currentFrame = 0;
     this.timer = 0;
@@ -1034,8 +1175,8 @@
       collisionBoxes: [
         new CollisionBox(0, 7, 5, 27),
         new CollisionBox(4, 0, 6, 34),
-        new CollisionBox(10, 4, 7, 14)
-      ]
+        new CollisionBox(10, 4, 7, 14),
+      ],
     },
     {
       type: 'CACTUS_LARGE',
@@ -1049,8 +1190,8 @@
       collisionBoxes: [
         new CollisionBox(0, 12, 7, 38),
         new CollisionBox(8, 0, 7, 49),
-        new CollisionBox(16, 10, 9, 38)
-      ]
+        new CollisionBox(16, 10, 9, 38),
+      ],
     },
     {
       type: 'PTERODACTYL',
@@ -1064,8 +1205,14 @@
       numFrames: 2,
       frameRate: 1000 / 6,
       speedOffset: 0.8,
-      collisionBoxes: [new CollisionBox(15, 15, 16, 5), new CollisionBox(18, 21, 24, 6), new CollisionBox(2, 14, 4, 3), new CollisionBox(6, 10, 4, 7), new CollisionBox(10, 8, 6, 9)]
-    }
+      collisionBoxes: [
+        new CollisionBox(15, 15, 16, 5),
+        new CollisionBox(18, 21, 24, 6),
+        new CollisionBox(2, 14, 4, 3),
+        new CollisionBox(6, 10, 4, 7),
+        new CollisionBox(10, 8, 6, 9),
+      ],
+    },
   ];
 
   Obstacle.prototype = {
@@ -1076,17 +1223,25 @@
       this.height = this.typeConfig.height;
 
       if (Array.isArray(this.typeConfig.yPos)) {
-        this.yPos = this.typeConfig.yPos[getRandomNum(0, this.typeConfig.yPos.length - 1)];
+        this.yPos =
+          this.typeConfig.yPos[
+            getRandomNum(0, this.typeConfig.yPos.length - 1)
+          ];
       } else {
         this.yPos = this.typeConfig.yPos;
       }
 
-      this.gap = this.gapOverride != null ? this.gapOverride : this.getGap(this.gapCoefficient, speed);
+      this.gap =
+        this.gapOverride != null
+          ? this.gapOverride
+          : this.getGap(this.gapCoefficient, speed);
     },
 
     cloneCollisionBoxes: function () {
       const boxes = this.typeConfig.collisionBoxes;
-      this.collisionBoxes = boxes.map((b) => new CollisionBox(b.x, b.y, b.width, b.height));
+      this.collisionBoxes = boxes.map(
+        b => new CollisionBox(b.x, b.y, b.width, b.height)
+      );
     },
 
     getGap: function (gapCoefficient, speed) {
@@ -1094,7 +1249,11 @@
       const speedGapBoost = 1 + Math.max(0, (speed - 6) / 10);
       // After 500m, make cacti as rare as possible.
       const lateBoost = (this.distanceMeters || 0) >= 500 ? 2.2 : 1;
-      const minGap = Math.round((this.width * speed + this.typeConfig.minGap * gapCoefficient) * speedGapBoost * lateBoost);
+      const minGap = Math.round(
+        (this.width * speed + this.typeConfig.minGap * gapCoefficient) *
+          speedGapBoost *
+          lateBoost
+      );
       const maxGap = Math.round(minGap * Obstacle.MAX_GAP_COEFFICIENT);
       return getRandomNum(minGap, maxGap);
     },
@@ -1103,12 +1262,15 @@
       if (this.typeConfig.speedOffset) {
         speed += this.typeConfig.speedOffset;
       }
-      this.xPos -= Math.floor((speed * FPS) / 1000 * deltaTime);
+      this.xPos -= Math.floor(((speed * FPS) / 1000) * deltaTime);
 
       if (this.typeConfig.numFrames) {
         this.timer += deltaTime;
         if (this.timer >= this.typeConfig.frameRate) {
-          this.currentFrame = this.currentFrame === this.typeConfig.numFrames - 1 ? 0 : this.currentFrame + 1;
+          this.currentFrame =
+            this.currentFrame === this.typeConfig.numFrames - 1
+              ? 0
+              : this.currentFrame + 1;
           this.timer = 0;
         }
       }
@@ -1123,7 +1285,8 @@
       if (IS_HIDPI) sourceX *= 1; // spritePos already for chosen sheet
 
       const spriteWidth = this.typeConfig.width;
-      if (this.currentFrame > 0) sourceX += spriteWidth * this.currentFrame * (IS_HIDPI ? 2 : 1);
+      if (this.currentFrame > 0)
+        sourceX += spriteWidth * this.currentFrame * (IS_HIDPI ? 2 : 1);
 
       this.canvasCtx.drawImage(
         Runner.imageSprite,
@@ -1140,7 +1303,7 @@
 
     isVisible: function () {
       return this.xPos + this.width > 0;
-    }
+    },
   };
 
   function HorizonLine(canvas, spritePos) {
@@ -1157,12 +1320,14 @@
 
   HorizonLine.prototype = {
     update: function (deltaTime, speed) {
-      const increment = Math.floor((speed * FPS) / 1000 * deltaTime);
+      const increment = Math.floor(((speed * FPS) / 1000) * deltaTime);
       this.xPos[0] -= increment;
       this.xPos[1] -= increment;
 
-      if (this.xPos[0] <= -this.sourceDimensions.WIDTH) this.xPos[0] = this.xPos[1] + this.sourceDimensions.WIDTH;
-      if (this.xPos[1] <= -this.sourceDimensions.WIDTH) this.xPos[1] = this.xPos[0] + this.sourceDimensions.WIDTH;
+      if (this.xPos[0] <= -this.sourceDimensions.WIDTH)
+        this.xPos[0] = this.xPos[1] + this.sourceDimensions.WIDTH;
+      if (this.xPos[1] <= -this.sourceDimensions.WIDTH)
+        this.xPos[1] = this.xPos[0] + this.sourceDimensions.WIDTH;
 
       this.draw();
     },
@@ -1181,7 +1346,7 @@
           sd.HEIGHT
         );
       }
-    }
+    },
   };
 
   function Horizon(canvas, spriteDef, dimensions, gapCoefficient) {
@@ -1197,17 +1362,33 @@
   }
 
   Horizon.prototype = {
-    update: function (deltaTime, speed, distanceMeters, canSpawnObstacles, opt_finish) {
+    update: function (
+      deltaTime,
+      speed,
+      distanceMeters,
+      canSpawnObstacles,
+      opt_finish
+    ) {
       this.horizonLine.update(deltaTime, speed);
       this.drawFinishFlag_(distanceMeters, opt_finish);
       this.updateClouds(deltaTime, speed);
-      return this.updateObstacles(deltaTime, speed, distanceMeters, canSpawnObstacles);
+      return this.updateObstacles(
+        deltaTime,
+        speed,
+        distanceMeters,
+        canSpawnObstacles
+      );
     },
 
     updateClouds: function (deltaTime, speed) {
-      const cloudSpeed = Runner.config.BG_CLOUD_SPEED * speed / 2;
-      if (this.clouds.length < Runner.config.MAX_CLOUDS && Math.random() < this.cloudFrequency) {
-        this.clouds.push(new Cloud(this.canvas, this.spriteDef.CLOUD, this.dimensions.WIDTH));
+      const cloudSpeed = (Runner.config.BG_CLOUD_SPEED * speed) / 2;
+      if (
+        this.clouds.length < Runner.config.MAX_CLOUDS &&
+        Math.random() < this.cloudFrequency
+      ) {
+        this.clouds.push(
+          new Cloud(this.canvas, this.spriteDef.CLOUD, this.dimensions.WIDTH)
+        );
       }
       for (let i = this.clouds.length - 1; i >= 0; i--) {
         this.clouds[i].update(cloudSpeed);
@@ -1215,7 +1396,12 @@
       }
     },
 
-    updateObstacles: function (deltaTime, speed, distanceMeters, canSpawnObstacles) {
+    updateObstacles: function (
+      deltaTime,
+      speed,
+      distanceMeters,
+      canSpawnObstacles
+    ) {
       if (this.obstacles.length > 0) {
         for (let i = this.obstacles.length - 1; i >= 0; i--) {
           this.obstacles[i].update(deltaTime, speed);
@@ -1227,7 +1413,8 @@
         canSpawnObstacles !== false &&
         (this.obstacles.length === 0 ||
           this.obstacles[this.obstacles.length - 1].xPos <
-            this.dimensions.WIDTH - this.obstacles[this.obstacles.length - 1].gap)
+            this.dimensions.WIDTH -
+              this.obstacles[this.obstacles.length - 1].gap)
       ) {
         this.addNewObstacle(speed, distanceMeters);
       }
@@ -1246,7 +1433,11 @@
         // Slightly larger gaps at the very beginning.
         // Beginning: 1.5x larger cactus group spacing.
         const base = dm < 1000 ? 203 : dm < 5000 ? 150 : 210;
-        const minGap = Math.round((groupWidth * speed + (minGapBase || base) * this.gapCoefficient) * speedGapBoost * lateBoost);
+        const minGap = Math.round(
+          (groupWidth * speed + (minGapBase || base) * this.gapCoefficient) *
+            speedGapBoost *
+            lateBoost
+        );
         const maxGap = Math.round(minGap * Obstacle.MAX_GAP_COEFFICIENT);
         return getRandomNum(minGap, maxGap);
       };
@@ -1256,13 +1447,21 @@
       const large = Obstacle.types[1];
       const bird = Obstacle.types[2];
       const r = Math.random();
-      const birdChance = dm >= 1000 ? (dm >= 3000 ? 0.28 : 0.20) : 0;
+      const birdChance = dm >= 1000 ? (dm >= 3000 ? 0.28 : 0.2) : 0;
       const allowBird = dm >= 1000 && speed >= bird.minSpeed;
 
       if (allowBird && r < birdChance) {
         const spritePos = this.spriteDef[bird.type];
         this.obstacles.push(
-          new Obstacle(this.canvasCtx, bird, spritePos, this.dimensions, this.gapCoefficient, speed, dm)
+          new Obstacle(
+            this.canvasCtx,
+            bird,
+            spritePos,
+            this.dimensions,
+            this.gapCoefficient,
+            speed,
+            dm
+          )
         );
         return;
       }
@@ -1276,11 +1475,11 @@
         groupCount = p < 0.55 ? 1 : p < 0.83 ? 2 : 3;
       } else if (dm < 1000) {
         const p = Math.random();
-        groupCount = p < 0.45 ? 1 : p < 0.72 ? 2 : p < 0.90 ? 3 : 4;
+        groupCount = p < 0.45 ? 1 : p < 0.72 ? 2 : p < 0.9 ? 3 : 4;
       } else {
         // After 1000m: mostly 3-4 cacti; 1-2 are very rare.
         const p = Math.random();
-        groupCount = p < 0.02 ? 1 : p < 0.12 ? 2 : p < 0.60 ? 3 : 4;
+        groupCount = p < 0.02 ? 1 : p < 0.12 ? 2 : p < 0.6 ? 3 : 4;
       }
 
       // Cacti inside a group should be a bit closer.
@@ -1300,10 +1499,19 @@
         const gapOverride = isLast ? null : internalGap;
 
         this.obstacles.push(
-          new Obstacle(this.canvasCtx, cactusType, spritePos, this.dimensions, this.gapCoefficient, speed, dm, {
-            xPos,
-            gapOverride
-          })
+          new Obstacle(
+            this.canvasCtx,
+            cactusType,
+            spritePos,
+            this.dimensions,
+            this.gapCoefficient,
+            speed,
+            dm,
+            {
+              xPos,
+              gapOverride,
+            }
+          )
         );
 
         groupWidth += cactusType.width;
@@ -1325,7 +1533,7 @@
     resize: function (width, height) {
       this.dimensions.WIDTH = width;
       this.dimensions.HEIGHT = height;
-    }
+    },
   };
 
   Horizon.prototype.drawFinishFlag_ = function (distanceMeters, opt_finish) {
@@ -1433,7 +1641,7 @@
 
     resize: function (width) {
       this.x = width - this.maxScoreUnits * DistanceMeter.config.DEST_WIDTH - 2;
-    }
+    },
   };
 
   // ---------- Game over ----------
@@ -1452,7 +1660,7 @@
     TEXT_WIDTH: 191,
     TEXT_HEIGHT: 11,
     RESTART_WIDTH: 36,
-    RESTART_HEIGHT: 32
+    RESTART_HEIGHT: 32,
   };
 
   GameOverPanel.prototype = {
@@ -1486,7 +1694,7 @@
         cfg.RESTART_WIDTH,
         cfg.RESTART_HEIGHT
       );
-    }
+    },
   };
 
   function mount() {
@@ -1497,6 +1705,7 @@
     new Runner('#' + ROOT_ID);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true });
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', mount, { once: true });
   else mount();
 })();

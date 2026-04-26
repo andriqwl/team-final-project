@@ -150,20 +150,10 @@ function updateData(data) {
       addText(text, data, 2);
       distributeOfEl(text, items);
   }
-  // if (text.length === 1) {
-  //   const arr = [];
-  //   arr.push(text);
-  //   addText(arr, data, 2);
-  //   items.append(arr[0])
-  // } else {
-  //   addText(text, data, 2);
-  //   distributeOfEl(text, items);
-  // }
-  // !!!
 
   scientistList.append(...items);
 }
-// HTML
+
 const scientistTitle = createEl('h2', 'scientist-title', 'Обери вченого/их');
 const scientistList = createEl('ul', 'scientist-list');
 const scientistText = createEl('p', 'scientist-text', undefined, 12);
@@ -191,7 +181,6 @@ scientistBtnList.append(ulL, ulR, ...scientistItemBtn);
 ulL.append(...btnArr1);
 ulR.append(...btnArr2);
 
-// LOGIK
 const events = {
   0: () => {
     const filtered = scientists.filter(s => s.born >= 1801 && s.born <= 1900);
@@ -215,7 +204,7 @@ const events = {
   },
   4: () => {
     const sorted = [...scientists].sort(
-      (a, b) => (a.dead - a.born) - (b.dead - b.born)
+      (a, b) => a.dead - a.born - (b.dead - b.born)
     );
     updateData(sorted);
   },
@@ -231,7 +220,7 @@ const events = {
   },
   7: () => {
     const sorted = [...scientists].sort(
-      (a, b) => (a.dead - a.born) - (b.dead - b.born)
+      (a, b) => a.dead - a.born - (b.dead - b.born)
     );
     updateData([sorted[0], sorted.at(-1)]);
   },
