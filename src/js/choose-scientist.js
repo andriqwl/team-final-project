@@ -128,8 +128,7 @@ function addText(arrayEl, arrayText, methodNumber = 1) {
 
     case 2:
       for (let i = 0; i < arrayText.length; i++) {
-        arrayEl[i].textContent =
-          `${arrayText[i].name} ${arrayText[i].surname}
+        arrayEl[i].textContent = `${arrayText[i].name} ${arrayText[i].surname}
     ${arrayText[i].born}-${arrayText[i].dead}`;
       }
       break;
@@ -161,7 +160,7 @@ function updateData(data) {
   //   distributeOfEl(text, items);
   // }
   // !!!
-  
+
   scientistList.append(...items);
 }
 // HTML

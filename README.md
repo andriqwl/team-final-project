@@ -1,57 +1,24 @@
-Ось чітка інструкція для твоєї команди. Я склав її так, щоб навіть той, хто
-вперше бачить Vite або GitHub Pages, зміг розібратися.
+🎮 Interactive Magic Games Portal
+A modern, light-weight web application featuring a collection of interactive games and utility tools. Built with pure JavaScript, this project demonstrates dynamic DOM manipulation, real-time logic processing, and a sleek, user-friendly interface.
 
-Ти можеш скопіювати цей текст у ваш робочий чат або додати в файл README.md у
-репозиторії.
+✨ Key Features
+The portal includes several interactive modules designed to engage users:
 
-🚀 Інструкція для команди: Як почати роботу Привіт усім! Наш проєкт базується на
-Vite. Головна фішка — ми робимо все через DOM (чистий JavaScript). Це означає,
-що і розмітку (HTML), і стилі (CSS) ми пишемо прямо всередині своїх JS-файлів.
+📅 Leap Year Checker: Find out if you were born in a leap year. Enter your birth year and get instant feedback with a clean, color-coded interface.
 
-🛠 Крок 1: Підготовка оточення Переконайтеся, що у вас встановлена Node.js (якщо
-ні — завантажте тут).
+🔢 Number Guessing Game: Challenge your intuition! Try to guess the secret number chosen by the computer (1-10).
 
-Склонуйте репозиторій собі на комп'ютер:
+🪨 Paper-Scissors-Rock: The classic game reimagined with a digital scoreboard. Play against the computer and track your wins in real-time.
 
-Bash git clone <посилання*на*ваш_репозиторій> Перейдіть у папку проєкту та
-встановіть залежності:
+🧮 Interactive Calculator: A fully functional calculator for quick mathematical operations.
 
-Bash npm install 💻 Крок 2: Запуск та розробка Запустіть локальний сервер:
+⏳ Time Calculator: A specialized tool to help you calculate time intervals or durations.
 
-Bash npm run dev В терміналі з'явиться посилання (зазвичай
-http://localhost:5173). Відкрийте його в браузері.
+👥 Meet the Team: A dedicated section showcasing the developers behind the project with an interactive slider.
 
-Знайдіть свій файл у папці src/js/sections/ (якщо його немає — створіть,
-наприклад calc.js).
+🛠️ Built With
+HTML5 - Semantic structure.
 
-ВАЖЛИВО: Підключіть свій файл у головний файл src/main.js, щоб він відобразився
-на сторінці:
+CSS3 - Custom styling with a focus on modern, rounded UI elements and responsiveness.
 
-JavaScript import './js/sections/назва*вашого*файлу.js'; 🎨 Крок 3: Правила
-написання коду (DOM-style) Ми не редагуємо index.html. Кожен працює у своєму
-JS-файлі за такою схемою:
-
-JavaScript // 1. Знаходимо свій контейнер (ID дивіться в index.html) const root
-= document.querySelector('#назва-вашої-секції-root');
-
-// 2. Створюємо елементи const wrapper = document.createElement('div');
-wrapper.textContent = "Привіт, це моя секція!";
-
-// 3. Додаємо стилі прямо тут wrapper.style.padding = '20px';
-wrapper.style.backgroundColor = '#f0f0f0'; wrapper.style.borderRadius = '10px';
-
-// 4. Вставляємо все в сторінку root.appendChild(wrapper); 🚀 Крок 4: Як
-зберегти зміни (Git) Коли ваша частина готова:
-
-Оновіть свій код до останньої версії: git pull origin main.
-
-Додайте зміни: git add ..
-
-Зробіть коміт: git commit -m "feat: додано логіку для секції <назва>".
-
-Відправте в репозиторій: git push origin main.
-
-🌍 Про GitHub Pages Наш проєкт автоматично оновлюється на GitHub Pages після
-кожного вашого push у гілку main.
-
-Посилання на сайт: https://<твій-нік>.github.io/<назва-репозиторію>/
+Vanilla JavaScript (ES6+) - All game logic and dynamic element creation are handled without external libraries or frameworks.

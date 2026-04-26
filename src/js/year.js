@@ -1,76 +1,135 @@
-const yearRoot = document.querySelector('#super-section');
+const yearRoot = document.getElementById('year');
 
-if (yearRoot) {
-  if (!document.querySelector('style[data-dom-section="year-check"]')) {
-    const style = document.createElement('style');
-    style.setAttribute('data-dom-section', 'year-check');
-    style.textContent = `
-      .yr-container{width:720px;max-width:100%;margin:0 auto;box-sizing:border-box}
-      .yr-wrap{max-width:720px;margin:36px auto 0;font-family:"Montserrat Alternates",sans-serif}
-      .yr-title{margin:0 0 36px;text-align:center;font-size:16px;font-weight:400;line-height:1;color:#000}
-      .yr-row{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%}
-      .yr-controls{display:flex;align-items:center;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.25))}
-      .yr-input{
-        box-sizing:border-box;width:215px;height:35px;padding:0 10px;border:none;border-radius:20px 0 0 20px;
-        background:#d7d7d7;color:#000;font-size:12px;line-height:1;outline:none
-      }
-      .yr-input::placeholder{color:#7e7e7e}
-      .yr-input[type=number]::-webkit-outer-spin-button,
-      .yr-input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-      .yr-btn{box-sizing:border-box;width:35px;height:35px;border:none;border-radius:0 20px 20px 0;background:#000;cursor:pointer;position:relative}
-      .yr-btn::before{content:"";position:absolute;left:10px;top:9px;width:8px;height:8px;border:2px solid #fff;border-radius:50%}
-      .yr-btn::after{content:"";position:absolute;left:19px;top:18px;width:6px;height:2px;background:#fff;transform:rotate(45deg);transform-origin:left center}
-      .yr-result{min-height:15px;margin:0;font-size:12px;line-height:1;text-align:right}
-      .yr-divider{width:536px;height:0;border-top:1px solid #000;margin:36px auto 0}
-    `;
-    document.head.appendChild(style);
+// Очищаємо root, щоб нічого не дублювалося
+yearRoot.innerHTML = '';
+
+// 1. Контейнер секції (центрування)
+const yearContainer = document.createElement('div');
+yearContainer.style.cssText = `
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+`;
+
+// 2. Заголовок
+const yearTitle = document.createElement('h2');
+yearTitle.textContent = 'Перевір в який рік ти народився';
+yearTitle.style.cssText = `
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 25px;
+  color: #000;
+  text-align: center;
+`;
+
+// 3. Ряд для інпуту та результату
+const controlsWrapper = document.createElement('div');
+controlsWrapper.style.cssText = `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+`;
+
+// 4. Поле введення (компактне)
+const inputGroup = document.createElement('div');
+inputGroup.style.cssText = `
+  display: flex;
+  background: #E0E0E0;
+  border-radius: 25px;
+  overflow: hidden;
+  height: 40px;
+  width: 260px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+`;
+
+const yearInput = document.createElement('input');
+yearInput.type = 'number';
+yearInput.placeholder = 'Введіть рік';
+yearInput.style.cssText = `
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0 15px;
+  outline: none;
+  font-size: 14px;
+`;
+
+const searchBtn = document.createElement('button');
+searchBtn.style.cssText = `
+  width: 45px;
+  background: #000;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+searchBtn.innerHTML = `
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+`;
+
+// 5. Текст результату
+const resultDisplay = document.createElement('p');
+resultDisplay.style.cssText = `
+  margin: 0;
+  font-size: 16px;
+  min-width: 250px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  color: #FF1E1E;
+`;
+
+// 6. Нижній розділювач (Divider)
+const divider = document.createElement('div');
+divider.style.cssText = `
+  width: 536px;
+  height: 0;
+  border-top: 1px solid #000;
+  margin-top: 36px;
+`;
+
+// ЗБІРКА
+inputGroup.append(yearInput, searchBtn);
+controlsWrapper.append(inputGroup, resultDisplay);
+
+yearContainer.appendChild(yearTitle);
+yearContainer.appendChild(controlsWrapper);
+yearContainer.appendChild(divider); // Додаємо лінію в самий ніч секції
+
+yearRoot.appendChild(yearContainer);
+
+// 7. Логіка
+function checkLeapYear() {
+  const year = parseInt(yearInput.value);
+
+  if (!yearInput.value) {
+    resultDisplay.textContent = 'Введіть рік';
+    resultDisplay.style.color = '#999';
+    return;
   }
 
-  yearRoot.innerHTML = `
-    <div class="yr-container">
-      <div class="yr-wrap">
-        <h2 class="yr-title">Перевір в який рік ти народився</h2>
-        <div class="yr-row">
-          <div class="yr-controls">
-            <input class="yr-input" type="number" placeholder="Введіть рік народження" />
-            <button class="yr-btn" type="button"></button>
-          </div>
-          <p class="yr-result"></p>
-        </div>
-        <div class="yr-divider"></div>
-      </div>
-    </div>
-  `;
+  const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
-  const input = yearRoot.querySelector('.yr-input');
-  const button = yearRoot.querySelector('.yr-btn');
-  const result = yearRoot.querySelector('.yr-result');
-
-  function checkYear() {
-    const value = input.value.trim();
-    const year = Number(value);
-
-    if (!value || Number.isNaN(year) || !Number.isInteger(year) || year < 1) {
-      result.style.color = '#D11A2A';
-      result.textContent = 'Введіть коректний рік.';
-      return;
-    }
-
-    const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-
-    if (isLeap) {
-      result.style.color = '#039900';
-      result.textContent = 'Ви народилися у високосний рік!';
-    } else {
-      result.style.color = '#D11A2A';
-      result.textContent = 'Ви народилися не у високосний рік.';
-    }
+  if (isLeap) {
+    resultDisplay.textContent = 'Ви народилися у високосний рік!';
+    resultDisplay.style.color = '#54B435';
+  } else {
+    resultDisplay.textContent = 'Ви народилися у звичайний рік';
+    resultDisplay.style.color = '#FF1E1E';
   }
-
-  button.addEventListener('click', checkYear);
-  input.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-      checkYear();
-    }
-  });
 }
+
+// Події
+searchBtn.addEventListener('click', checkLeapYear);
+yearInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') checkLeapYear();
+});

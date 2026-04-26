@@ -24,6 +24,7 @@ import './js/modal.js';
 import './js/h1.js';
 import './js/year.js';
 import './js/guess-number.js';
+import './js/year.js';
 import './js/rock-paper-scissors.js';
 import './js/calc.js';
 import './js/time-calc.js';
