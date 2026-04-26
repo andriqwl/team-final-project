@@ -3,20 +3,6 @@
   root.setAttribute('data-category', 'numerical');
 
   let selectedOp = '+';
-<<<<<<< HEAD
-=======
-
-  root.style.display = 'flex';
-  root.style.flexDirection = 'column';
-  root.style.alignItems = 'center';
-  root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Білий прозорий фон
-  root.style.borderRadius = '30px';
-  root.style.margin = '36px auto 36px auto';
-  // root.style.paddingBottom = '40px';
-  root.style.maxWidth = '1100px';
-  root.style.backdropFilter = 'blur(10px)';
-
->>>>>>> a3b54ef7c4ce2c37b2f4a72a13a9fa16bd6291d7
   const spinnerStyle = document.createElement('style');
   spinnerStyle.textContent =
     'input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}input[type=number]{-moz-appearance:textfield;}';
@@ -29,13 +15,7 @@
   title.style.fontWeight = '400';
   title.style.fontSize = '16px';
   title.style.color = '#000';
-<<<<<<< HEAD
-  title.style.margin = '36px 0';
-  title.style.textAlign = 'center';
-  title.style.width = '100%';
-=======
   title.style.margin = '0 0 36px 0';
->>>>>>> a3b54ef7c4ce2c37b2f4a72a13a9fa16bd6291d7
 
   const row = document.createElement('div');
   row.style.display = 'flex';
