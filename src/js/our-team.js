@@ -1,5 +1,15 @@
 const ourTeamSection = document.querySelector('#our-team-root');
 
+// Імпорти (переконайся, що шляхи правильні)
+import andrian from '../img/andrian.jpg';
+import timur from '../img/timur.jpg';
+import ivanS from '../img/ivanS.jpg';
+import ivanK from '../img/ivanK.jpg';
+import olena from '../img/olena.jpg';
+import arrowLeft from '../img/arrowL.png';
+import arrowRight from '../img/arrowR.png';
+
+// Універсальна функція створення елементів
 function createEl(tag, className, text, numberOftags = 1) {
   const elements = [];
   for (let i = 0; i < numberOftags; i++) {
@@ -10,46 +20,85 @@ function createEl(tag, className, text, numberOftags = 1) {
   }
   return numberOftags === 1 ? elements[0] : elements;
 }
-// розмітка
-// const container = createEl('div', 'container');
-const teamTitle = createEl('h2', 'team-title', 'Наша команда');
-console.log(teamTitle);
-const teamImg = createEl('img', 'team-img');
-teamImg.src = './img/photo5395423997429749346y.jpg'
-teamImg.alt = "фото Ім'я";
-const teamName = createEl('h3', 'team-name', 'Ім’я студента');
-const teamInfo = createEl(
-  'p',
-  'team-info',
-  'Інформація про роботу, яку він/вона виконав/ла'
-);
-const arrowLeftBtn = createEl('button', 'team-button--l');
-const arrowLeftSvg = createEl('svg', 'team-svg--l');
-const arrowLeftIcon = createEl('use', undefined);
-const arrowRightBtn = createEl('button', 'team-button--r');
-const arrowRightSvg = createEl('svg', 'team-svg--r');
-const arrowRightIcon = createEl('use', 'team-icon--r');
 
-// arrowRightSvg.style.width = "150px";
-arrowLeftIcon.setAttribute("href", './icons/symboldefs.svg#icon-rock')  ;
-console.log(arrowLeftIcon)
-arrowRightIcon.href = ""
-arrowLeftBtn.append(arrowLeftSvg)
-arrowLeftSvg.append(arrowLeftIcon);
-arrowRightBtn.append(arrowRightSvg);
-arrowRightSvg.append(arrowRightIcon);
+// Перевірка наявності рута
+if (ourTeamSection) {
+  ourTeamSection.innerHTML = ''; // Очищуємо перед рендером
 
+  // 1. Створення елементів інтерфейсу
+  const teamTitle = createEl('h2', 'team-title', 'Наша команда');
+  const teamImg = createEl('img', 'team-img');
+  teamImg.alt = 'Фото учасника';
 
-const lineList = createEl('ul', 'line-list');
-const lineItem = createEl('li', 'line-item', undefined, 7);
+  const teamName = createEl('h3', 'team-name');
+  const teamInfo = createEl('p', 'team-info');
 
-ourTeamSection.append(
-  teamTitle,
-  teamImg,
-  teamName,
-  teamInfo,
-  lineList,
-  arrowLeftBtn,
-  arrowRightBtn
-);
-lineList.append(...lineItem);
+  const arrowLeftBtn = createEl('button', 'team-button--l');
+  const arrowLeftImg = createEl('img', 'team-img--l');
+  arrowLeftImg.src = arrowLeft;
+  arrowLeftBtn.append(arrowLeftImg);
+
+  const arrowRightBtn = createEl('button', 'team-button--r');
+  const arrowRightImg = createEl('img', 'team-img--r');
+  arrowRightImg.src = arrowRight;
+  arrowRightBtn.append(arrowRightImg);
+
+  const lineList = createEl('ul', 'line-list');
+  const lineItems = createEl('li', 'line-item', undefined, 5);
+  lineList.append(...lineItems);
+
+  // 2. Дані для слайдера
+  const imgArr = [andrian, ivanS, timur, ivanK, olena];
+  const nameArr = [
+    'Андріан Костик',
+    'Іван Скрипка',
+    'Тимур Ганзій',
+    'Іван Карпенко',
+    'Олена Наумчик',
+  ];
+  const infoArr = [
+    'Team Lead: Керував процесом розробки та координував взаємодію команди.',
+    'Я скрам-майстер, розробляв секцію "Камінь - ножиці - папір" і "Калькулятор"',
+    'Я розробляв секції "Наша команда" і "Обери вченого/их"',
+    'Я розробляв секції "Футбол", "Гугл – динозавр" та "Найбільше число"',
+    'Я зробила секцію "Вгадай число", "Калькулятор часу" та footer',
+  ];
+
+  let currentIndex = 0;
+
+  // 3. Функція оновлення контенту
+  function updateSlider() {
+    teamImg.src = imgArr[currentIndex];
+    teamName.textContent = nameArr[currentIndex];
+    teamInfo.textContent = infoArr[currentIndex];
+
+    // Оновлення індикаторів (ліній)
+    lineItems.forEach((item, index) => {
+      if (index === currentIndex) {
+        item.classList.add('hovered');
+      } else {
+        item.classList.remove('hovered');
+      }
+    });
+  }
+
+  // 4. Логіка кнопок
+  arrowRightBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % imgArr.length;
+    updateSlider();
+  });
+
+  arrowLeftBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + imgArr.length) % imgArr.length;
+    updateSlider();
+  });
+
+  // 5. Додавання в DOM (структуруй за макетом)
+  const sliderContent = createEl('div', 'team-slider-content');
+  sliderContent.append(arrowLeftBtn, teamImg, arrowRightBtn);
+
+  ourTeamSection.append(teamTitle, sliderContent, teamName, teamInfo, lineList);
+
+  // Перший запуск
+  updateSlider();
+}

@@ -1,7 +1,7 @@
 //Тут пишіть свій скрипт
 
 const root = document.getElementById('rock-paper-scissors-root');
-root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Наш "скляний" фон
+
 root.style.borderRadius = '30px';
 root.style.margin = '0px auto 0px auto';
 

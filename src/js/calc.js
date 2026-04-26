@@ -9,13 +9,14 @@
   document.head.appendChild(spinnerStyle);
 
   const title = document.createElement('h1');
-  title.id = 'calc-title'; // ТУТ
+  title.id = 'calc-title';
   title.textContent = 'Калькулятор';
   title.style.fontFamily = 'var(--font-family)';
   title.style.fontWeight = '400';
   title.style.fontSize = '16px';
   title.style.color = '#000';
   title.style.margin = '0 0 36px 0';
+  title.style.textAlign = 'center';
 
   const row = document.createElement('div');
   row.style.display = 'flex';
@@ -160,13 +161,4 @@
 
   root.appendChild(title);
   root.appendChild(row);
-
-  const dividerrr = document.createElement('div');
-  dividerrr.id = 'calc-divider';
-  dividerrr.style.width = '536px';
-  dividerrr.style.height = '0';
-  dividerrr.style.borderTop = '1px solid #000';
-  dividerrr.style.margin = '36px auto 0';
-
-  root.appendChild(dividerrr);
 })();
