@@ -17,7 +17,7 @@
 .team-img {
   width: 150px;
   height: 150px;
-
+  border-radius: 20px;
   margin-bottom: 20px;
 }
 .team-name {
@@ -48,15 +48,29 @@
   border-radius: 3px;
   background-color: #d9d9d9;
 }
+
+.line-item.hovered {
+  border-radius: 3px;
+  width: 30px;
+  height: 3px;
+  background: #797979;
+}
 .team-button--l {
   position: absolute;
+  left: 80px;
+  top: 100px;
+  background-color: transparent;
+  border: transparent;
 }
 .team-button--r {
   position: absolute;
+  right: 80px;
+  top: 100px;
+  background-color: transparent;
+  border: transparent;
 }
 
-.team-svg--l{
-    width: 150px;
-    height: 75px;
-    fill: #000;
+.team-svg--l {
+  width: 150px;
+  height: 75px;
 }
