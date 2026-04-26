@@ -14,7 +14,7 @@ yearContainer.style.cssText = `
   width: 100%;
 `;
 
-// 2. Заголовок (тепер точно зверху)
+// 2. Заголовок
 const yearTitle = document.createElement('h2');
 yearTitle.textContent = 'Перевір в який рік ти народився';
 yearTitle.style.cssText = `
@@ -44,6 +44,7 @@ inputGroup.style.cssText = `
   overflow: hidden;
   height: 40px;
   width: 260px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 `;
 
 const yearInput = document.createElement('input');
@@ -84,20 +85,29 @@ resultDisplay.style.cssText = `
   height: 40px;
   display: flex;
   align-items: center;
-  color: #FF1E1E; /* Дефолтний колір */
+  color: #FF1E1E;
 `;
 
-// ЗБІРКА (Важливий порядок!)
+// 6. Нижній розділювач (Divider)
+const divider = document.createElement('div');
+divider.style.cssText = `
+  width: 536px;
+  height: 0;
+  border-top: 1px solid #000;
+  margin-top: 36px;
+`;
+
+// ЗБІРКА
 inputGroup.append(yearInput, searchBtn);
 controlsWrapper.append(inputGroup, resultDisplay);
 
-// Додаємо заголовок ПЕРШИМ, потім ряд з інпутом
 yearContainer.appendChild(yearTitle);
 yearContainer.appendChild(controlsWrapper);
+yearContainer.appendChild(divider); // Додаємо лінію в самий ніч секції
 
 yearRoot.appendChild(yearContainer);
 
-// 6. Логіка
+// 7. Логіка
 function checkLeapYear() {
   const year = parseInt(yearInput.value);
 
