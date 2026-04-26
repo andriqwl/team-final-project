@@ -1,30 +1,23 @@
 (function () {
   const root = document.getElementById('calc-root');
+  root.setAttribute('data-category', 'numerical');
 
   let selectedOp = '+';
-
-  root.style.display = 'flex';
-  root.style.flexDirection = 'column';
-  root.style.alignItems = 'center';
-  root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Білий прозорий фон
-  root.style.borderRadius = '30px';
-  root.style.margin = '20px auto 50px auto';
-  root.style.paddingBottom = '40px';
-  root.style.maxWidth = '1100px';
-  root.style.backdropFilter = 'blur(10px)';
-
   const spinnerStyle = document.createElement('style');
   spinnerStyle.textContent =
     'input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}input[type=number]{-moz-appearance:textfield;}';
   document.head.appendChild(spinnerStyle);
 
   const title = document.createElement('h1');
+  title.id = 'calc-title'; // ТУТ
   title.textContent = 'Калькулятор';
   title.style.fontFamily = 'var(--font-family)';
   title.style.fontWeight = '400';
   title.style.fontSize = '16px';
   title.style.color = '#000';
   title.style.margin = '36px 0';
+  title.style.textAlign = 'center';
+  title.style.width = '100%';
 
   const row = document.createElement('div');
   row.style.display = 'flex';
@@ -123,6 +116,7 @@
   eq.style.marginRight = '40px';
 
   const result = document.createElement('div');
+  result.id = 'calc-result-box';
   result.textContent = 'Результат';
   result.style.width = '135px';
   result.style.height = '35px';
@@ -168,7 +162,9 @@
 
   root.appendChild(title);
   root.appendChild(row);
+
   const dividerrr = document.createElement('div');
+  dividerrr.id = 'calc-divider';
   dividerrr.style.width = '536px';
   dividerrr.style.height = '0';
   dividerrr.style.borderTop = '1px solid #000';
