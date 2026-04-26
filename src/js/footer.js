@@ -46,7 +46,7 @@ contacts.forEach(text => {
   const p = document.createElement('p');
   p.textContent = text;
   p.className = 'footer-contact-item';
-  p.style.margin = '5px 0';
+  // p.style.margin = '5px 0';
   contactsBox.appendChild(p);
 });
 
@@ -74,7 +74,7 @@ const subscribeButton = document.createElement('button');
 subscribeButton.textContent = 'Підписатись';
 subscribeButton.className = 'footer-button';
 subscribeButton.id = 'footer-sub-btn';
-subscribeButton.style.padding = '10px 20px';
+subscribeButton.style.padding = '10px';
 subscribeButton.style.borderRadius = '20px';
 subscribeButton.style.cursor = 'pointer';
 formBox.appendChild(subscribeButton);
@@ -83,7 +83,7 @@ const noteText = document.createElement('p');
 noteText.textContent =
   '*Підписавшись, Ви зможете отримувати інформацію про новини на сайті';
 noteText.className = 'footer-note';
-noteText.style.fontSize = '12px';
+noteText.style.fontSize = '6px';
 noteText.style.marginTop = '10px';
 subscribeBox.appendChild(noteText);
 

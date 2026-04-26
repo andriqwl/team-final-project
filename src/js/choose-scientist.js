@@ -150,17 +150,6 @@ function updateData(data) {
       addText(text, data, 2);
       distributeOfEl(text, items);
   }
-  // if (text.length === 1) {
-  //   const arr = [];
-  //   arr.push(text);
-  //   addText(arr, data, 2);
-  //   items.append(arr[0])
-  // } else {
-  //   addText(text, data, 2);
-  //   distributeOfEl(text, items);
-  // }
-  // !!!
-
   scientistList.append(...items);
 }
 // HTML
