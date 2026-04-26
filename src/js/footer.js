@@ -148,7 +148,7 @@ subscribeBox.appendChild(noteText);
 
             if (!emailInput.value || !emailInput.value.includes('@')) {
                 alert('Введіть правильний email');
-                return;
+                return; 
             }
 
             openSubModal();
