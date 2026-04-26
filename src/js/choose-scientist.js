@@ -215,7 +215,7 @@ const events = {
   },
   4: () => {
     const sorted = [...scientists].sort(
-      (a, b) => a.dead - a.born - (b.dead - b.born)
+      (a, b) => (a.dead - a.born) - (b.dead - b.born)
     );
     updateData(sorted);
   },
