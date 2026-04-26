@@ -9,7 +9,7 @@ if (guessNumberRoot) {
         flex-direction: column;
         align-items: center;
         padding: 30px 0;
-        // font-family: 'Montserrat', sans-serif;
+        font-family: var(--font-family);
         width: 100%;
     `;
 
@@ -52,6 +52,7 @@ if (guessNumberRoot) {
         padding: 0 15px;
         outline: none;
         font-size: 14px;
+        font-family: var(--font-family);
     `;
 
   const button = document.createElement('button');
@@ -79,6 +80,7 @@ if (guessNumberRoot) {
         height: 40px;
         display: flex;
         align-items: center;
+        font-family: var(--font-family);
     `;
 
   const bottomDivider = document.createElement('div');
