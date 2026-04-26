@@ -145,7 +145,14 @@ subscribeBox.appendChild(noteText);
     if (triggerBtn) {
         triggerBtn.addEventListener('click', (e) => {
             e.preventDefault();
+
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                alert('Введіть правильний email');
+                return; 
+            }
+
             openSubModal();
         });
     }
+    
 })();
