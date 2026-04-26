@@ -1,5 +1,12 @@
 const ourTeamSection = document.querySelector('#our-team-root');
 
+import andrian from '../img/andrian.jpg';
+import timur from "../img/timur.jpg"
+import ivanS from '../img/ivanS.jpg';
+import ivanK from '../img/ivanK.jpg';
+import olena from '../img/olena.jpg';
+import arrowLeft from '../img/arrowL.png';
+import arrowRight from '../img/arrowR.png';
 function createEl(tag, className, text, numberOftags = 1) {
   const elements = [];
   for (let i = 0; i < numberOftags; i++) {
@@ -17,27 +24,21 @@ console.log(teamTitle);
 const teamImg = createEl('img', 'team-img');
 teamImg.src = './img/andrian.jpg';
 teamImg.alt = "фото Ім'я";
-const teamName = createEl('h3', 'team-name', 'Ім’я студента');
+const teamName = createEl('h3', 'team-name', 'Андріа Костик');
 const teamInfo = createEl(
   'p',
   'team-info',
-  'Інформація про роботу, яку він/вона виконав/ла'
+  'Team Lead: Керував процесом розробки та координував взаємодію команди.'
 );
 const arrowLeftBtn = createEl('button', 'team-button--l');
-const arrowLeftSvg = createEl('svg', 'team-svg--l');
-const arrowLeftIcon = createEl('use', undefined);
+const arrowLeftImg = createEl('img', 'team-img--l');
 const arrowRightBtn = createEl('button', 'team-button--r');
-const arrowRightSvg = createEl('svg', 'team-svg--r');
-const arrowRightIcon = createEl('use', 'team-icon--r');
+const arrowRightImg = createEl('img', 'team-img--r');
 
-// arrowRightSvg.style.width = "150px";
-arrowLeftIcon.setAttribute('href', './icons/symboldefs.svg#icon-rock');
-console.log(arrowLeftIcon);
-arrowRightIcon.href = '';
-arrowLeftBtn.append(arrowLeftSvg);
-arrowLeftSvg.append(arrowLeftIcon);
-arrowRightBtn.append(arrowRightSvg);
-arrowRightSvg.append(arrowRightIcon);
+arrowLeftImg.src = arrowLeft;
+arrowRightImg.src = arrowRight;
+arrowLeftBtn.append(arrowLeftImg);
+arrowRightBtn.append(arrowRightImg);
 
 const lineList = createEl('ul', 'line-list');
 const lineItem = createEl('li', 'line-item', undefined, 5);
@@ -58,11 +59,11 @@ lineList.append(...lineItem);
 let currentIndex = 0;
 let lastIndex = 0
 const imgArr = [
-  './img/andrian.jpg',
-  './img/ivanS.jpg',
-  './img/timur.jpg',
-  './img/ivanK.jpg',
-  './img/olena.jpg',
+  andrian,
+  ivanS,
+  timur,
+  ivanK,
+  olena,
 ];
 const nameArr = [
   'Андріа Костик',
@@ -72,11 +73,11 @@ const nameArr = [
   'Олена Наумчик',
 ];
 const infoArr = [
-  'Team lead нашої команди',
-  'Я скрам-майстер і розробляв секцію "Наша команда" і "Обери вченого/их"',
+  'Team Lead: Керував процесом розробки та координував взаємодію команди.',
+  'Я скрам-майстер, розробляв секцію "Камінь - ножиці - папір" і "Калькулятор"',
   'Я розробляв секції "Наша команда" і "Обери вченого/их"',
-  '',
-  '',
+  'Я розробляв секції "Футбол" , "Гугл – динозавр" та "Найбільше число"',
+  'Я зробила секцію "Вгадай число", "Калькулятор часу" та footer',
 ];
 
 function changeInfo() {

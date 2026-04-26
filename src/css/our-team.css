@@ -17,7 +17,7 @@
 .team-img {
   width: 150px;
   height: 150px;
-
+  border-radius: 20px;
   margin-bottom: 20px;
 }
 .team-name {
@@ -57,17 +57,20 @@
 }
 .team-button--l {
   position: absolute;
-  left: 100px;
+  left: 80px;
   top: 100px;
+  background-color: transparent;
+  border: transparent;
 }
 .team-button--r {
   position: absolute;
-  right: 100px;
+  right: 80px;
   top: 100px;
+  background-color: transparent;
+  border: transparent;
 }
 
 .team-svg--l {
   width: 150px;
   height: 75px;
-  fill: #000;
 }
