@@ -89,7 +89,6 @@
       const headerGreeting = document.getElementById('user-greeting');
       if (headerGreeting) headerGreeting.textContent = `Вітаємо, ${name}!`;
 
-      // Просто закриваємо модалку після збереження
       closeModal();
     };
   }

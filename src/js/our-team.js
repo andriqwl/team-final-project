@@ -1,6 +1,5 @@
 const ourTeamSection = document.querySelector('#our-team-root');
 
-// Імпорти (переконайся, що шляхи правильні)
 import andrian from '../img/andrian.jpg';
 import timur from '../img/timur.jpg';
 import ivanS from '../img/ivanS.jpg';
@@ -9,7 +8,6 @@ import olena from '../img/olena.jpg';
 import arrowLeft from '../img/arrowL.png';
 import arrowRight from '../img/arrowR.png';
 
-// Універсальна функція створення елементів
 function createEl(tag, className, text, numberOftags = 1) {
   const elements = [];
   for (let i = 0; i < numberOftags; i++) {
@@ -21,9 +19,8 @@ function createEl(tag, className, text, numberOftags = 1) {
   return numberOftags === 1 ? elements[0] : elements;
 }
 
-// Перевірка наявності рута
 if (ourTeamSection) {
-  ourTeamSection.innerHTML = ''; // Очищуємо перед рендером
+  ourTeamSection.innerHTML = '';
 
   // 1. Створення елементів інтерфейсу
   const teamTitle = createEl('h2', 'team-title', 'Наша команда');
@@ -47,7 +44,6 @@ if (ourTeamSection) {
   const lineItems = createEl('li', 'line-item', undefined, 5);
   lineList.append(...lineItems);
 
-  // 2. Дані для слайдера
   const imgArr = [andrian, ivanS, timur, ivanK, olena];
   const nameArr = [
     'Андріан Костик',
@@ -66,13 +62,11 @@ if (ourTeamSection) {
 
   let currentIndex = 0;
 
-  // 3. Функція оновлення контенту
   function updateSlider() {
     teamImg.src = imgArr[currentIndex];
     teamName.textContent = nameArr[currentIndex];
     teamInfo.textContent = infoArr[currentIndex];
 
-    // Оновлення індикаторів (ліній)
     lineItems.forEach((item, index) => {
       if (index === currentIndex) {
         item.classList.add('hovered');
@@ -92,8 +86,6 @@ if (ourTeamSection) {
     currentIndex = (currentIndex - 1 + imgArr.length) % imgArr.length;
     updateSlider();
   });
-
-  // 5. Додавання в DOM (структуруй за макетом)
   const sliderContent = createEl('div', 'team-slider-content');
   sliderContent.append(arrowLeftBtn, teamImg, arrowRightBtn);
 

@@ -1,11 +1,8 @@
-//Тут пишіть свій скрипт
-
 const root = document.getElementById('rock-paper-scissors-root');
 
 root.style.borderRadius = '30px';
 root.style.margin = '0px auto 0px auto';
 
-// root.style.padding = '36px 0'; // Внутрішні відступи
 root.style.paddingTop = '0';
 root.style.maxWidth = '1100px';
 root.style.backdropFilter = 'blur(10px)';
@@ -16,18 +13,6 @@ const choices = ['rock', 'scissors', 'paper'];
 let playerScore = 0;
 let computerScore = 0;
 
-// import rock from '../img/stone.png';
-// import paper from '../img/paper.png';
-// import scissors from '../img/scissors.png';
-
-// const icons = {
-//   rock,
-//   paper,
-//   scissors,
-//   // rock: '/img/stone.png',
-//   // paper: '/img/paper.png',
-//   // scissors: '/img/scissors.png',
-// };
 import rock from '../img/stone.png';
 import paper from '../img/paper.png';
 import scissors from '../img/scissors.png';
@@ -52,11 +37,9 @@ title.textContent = 'Камінь - ножиці - папір';
 title.style.textAlign = 'center';
 title.style.fontSize = '16px';
 title.style.fontWeight = '400';
-// title.style.marginTop = '36px';
 title.style.marginBottom = '20px';
 container.appendChild(title);
 
-// --- LAYOUT: buttons centered, scoreboard to the right ---
 const gameWrapper = document.createElement('div');
 gameWrapper.style.display = 'flex';
 gameWrapper.style.justifyContent = 'center';
@@ -96,7 +79,6 @@ choices.forEach(choice => {
   btnContainer.appendChild(btn);
 });
 
-// Scoreboard
 const scoreboard = document.createElement('div');
 scoreboard.style.fontSize = '12px';
 scoreboard.style.lineHeight = '170%';
@@ -125,7 +107,6 @@ gameWrapper.appendChild(btnContainer);
 gameWrapper.appendChild(scoreboard);
 container.appendChild(gameWrapper);
 
-// Status message
 const statusMsg = document.createElement('p');
 statusMsg.id = 'status-msg';
 statusMsg.textContent = 'Зробіть свій вибір!';
@@ -136,7 +117,6 @@ statusMsg.style.fontWeight = '400';
 statusMsg.style.margin = '0';
 container.appendChild(statusMsg);
 
-// Computer choice bar
 const cpuDisplayBtn = document.createElement('div');
 cpuDisplayBtn.style.backgroundColor = 'black';
 cpuDisplayBtn.style.color = 'white';
@@ -151,7 +131,6 @@ container.appendChild(cpuDisplayBtn);
 
 root.appendChild(container);
 
-// Game logic
 function playRound(playerChoice) {
   const computerChoice = choices[Math.floor(Math.random() * choices.length)];
   let result = '';

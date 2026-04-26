@@ -1,9 +1,9 @@
-// СЕКЦИЯ "Введіть 3 числа"
 const biggestNumberRoot = document.querySelector('#three-numbers-root');
 
 if (biggestNumberRoot) {
   const ensureStyles = () => {
-    if (document.querySelector('style[data-dom-section="three-numbers"]')) return;
+    if (document.querySelector('style[data-dom-section="three-numbers"]'))
+      return;
     const style = document.createElement('style');
     style.setAttribute('data-dom-section', 'three-numbers');
     // CSS
@@ -54,7 +54,6 @@ if (biggestNumberRoot) {
     `;
     document.head.appendChild(style);
   };
-// создание элемента с классом и текстом
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -63,13 +62,11 @@ if (biggestNumberRoot) {
   };
 
   ensureStyles();
-  // чистка контейнера
   biggestNumberRoot.textContent = '';
 
   const wrap = el('div', 'bn-wrap');
   const title = el('h2', 'bn-title', 'Введіть 3 числа');
 
-  // инпуты тайп-текст
   const form = el('form', 'bn-form');
   const inputA = document.createElement('input');
   inputA.className = 'bn-input';
@@ -98,16 +95,21 @@ if (biggestNumberRoot) {
   biggestNumberRoot.appendChild(wrap);
 
   // фильтр ввода
-  const parseNum = (raw) => {
-    const s = String(raw ?? '').trim().replace(',', '.');
+  const parseNum = raw => {
+    const s = String(raw ?? '')
+      .trim()
+      .replace(',', '.');
     if (!s) return null;
     const n = Number(s);
     return Number.isFinite(n) ? n : null;
   };
 
-  // обновление результата
   const update = () => {
-    const values = [parseNum(inputA.value), parseNum(inputB.value), parseNum(inputC.value)].filter((v) => v != null);
+    const values = [
+      parseNum(inputA.value),
+      parseNum(inputB.value),
+      parseNum(inputC.value),
+    ].filter(v => v != null);
     if (values.length === 0) {
       result.hidden = true;
       result.textContent = '';
@@ -118,9 +120,9 @@ if (biggestNumberRoot) {
     result.textContent = `Найбільше число, яке ви ввели - "${maxValue}"`;
   };
 
-  // максимум обновляется мгновенно
-  for (const inp of [inputA, inputB, inputC]) inp.addEventListener('input', update);
-  form.addEventListener('submit', (e) => e.preventDefault());
+  for (const inp of [inputA, inputB, inputC])
+    inp.addEventListener('input', update);
+  form.addEventListener('submit', e => e.preventDefault());
   // запуск
   update();
 }

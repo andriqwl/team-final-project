@@ -1,6 +1,5 @@
 import footballIcon from '../img/football.png';
 
-// СЕКЦИЯ "ФУТБОЛ"
 const soccerRoot = document.querySelector('#soccer-root');
 
 if (soccerRoot) {
@@ -42,7 +41,6 @@ if (soccerRoot) {
     document.head.appendChild(style);
   };
 
-  //создание элементов
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -51,10 +49,9 @@ if (soccerRoot) {
   };
 
   ensureStyles();
-  // чистка секции
+
   soccerRoot.textContent = '';
 
-  // разметка
   const wrap = el('div', 'sc-wrap');
   const title = el('h2', 'sc-title', 'Футбол');
 
@@ -65,8 +62,6 @@ if (soccerRoot) {
   field.append(ball);
   wrap.append(title, field, divider);
   soccerRoot.appendChild(wrap);
-
-  // Логика :(
 
   field.addEventListener('click', event => {
     const fieldRect = field.getBoundingClientRect();
