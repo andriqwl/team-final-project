@@ -15,7 +15,7 @@
   title.style.fontWeight = '400';
   title.style.fontSize = '16px';
   title.style.color = '#000';
-  title.style.margin = '0 0 36px 0';
+  title.style.margin = '36px 0 36px 0';
   title.style.textAlign = 'center';
 
   const row = document.createElement('div');

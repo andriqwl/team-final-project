@@ -51,6 +51,7 @@ const title = document.createElement('h1');
 title.textContent = 'Камінь - ножиці - папір';
 title.style.textAlign = 'center';
 title.style.fontSize = '16px';
+title.style.fontWeight = '400';
 // title.style.marginTop = '36px';
 title.style.marginBottom = '20px';
 container.appendChild(title);
