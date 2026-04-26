@@ -1,5 +1,3 @@
-Ось професійний та привабливий опис для твого репозиторію на GitHub. Він структурований так, щоб одразу зацікавити відвідувача.
-
 🎮 Interactive Magic Games Portal
 A modern, light-weight web application featuring a collection of interactive games and utility tools. Built with pure JavaScript, this project demonstrates dynamic DOM manipulation, real-time logic processing, and a sleek, user-friendly interface.
 
