@@ -43,15 +43,28 @@ const dropdown = document.createElement('div');
 dropdown.style.cssText = `position: absolute; top: calc(100% + 15px); left: 50%; transform: translateX(-50%) translateY(-20px); background: white; border: 1px solid #e0e0e0; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-radius: 16px; display: flex; flex-direction: column; padding: 12px; gap: 5px; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; min-width: 180px;`;
 
 function filterGames(categoryId) {
-  document
-    .querySelectorAll('section[data-category]')
-    .forEach(
-      s =>
-        (s.style.display =
-          categoryId === 'all' || s.getAttribute('data-category') === categoryId
-            ? 'block'
-            : 'none')
-    );
+  // 1. Фільтруємо всі ігрові секції
+  document.querySelectorAll('section[data-category]').forEach(s => {
+    const isMatch =
+      categoryId === 'all' || s.getAttribute('data-category') === categoryId;
+    s.style.display = isMatch ? '' : 'none';
+  });
+
+  // 2. Спеціальна логіка для блоку команди
+  const ourTeam = document.querySelector('#our-team-root');
+  if (ourTeam) {
+    // Команда показується ТІЛЬКИ в "all" (головна) або в "acquaintance" (ознайомчий)
+    if (categoryId === 'all' || categoryId === 'acquaintance') {
+      ourTeam.style.display = ''; // Повертає стиль з CSS (не block)
+    } else {
+      ourTeam.style.display = 'none';
+    }
+  }
+}
+
+const ourTeam = document.querySelector('#our-team-root');
+if (ourTeam) {
+  ourTeam.style.display = ''; // Повертає стандартний дисплей
 }
 
 categories.forEach(cat => {

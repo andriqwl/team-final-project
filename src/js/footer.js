@@ -74,7 +74,6 @@ const subscribeButton = document.createElement('button');
 subscribeButton.textContent = 'Підписатись';
 subscribeButton.className = 'footer-button';
 subscribeButton.id = 'footer-sub-btn';
-subscribeButton.style.padding = '10px 20px';
 subscribeButton.style.borderRadius = '20px';
 subscribeButton.style.cursor = 'pointer';
 formBox.appendChild(subscribeButton);
@@ -87,9 +86,7 @@ noteText.style.fontSize = '12px';
 noteText.style.marginTop = '10px';
 subscribeBox.appendChild(noteText);
 
-// 5. Логіка модального вікна (інкапсульована в IIFE)
 (function () {
-  // Завантаження шрифтів
   const fontLink = document.createElement('link');
   fontLink.href =
     'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap';
