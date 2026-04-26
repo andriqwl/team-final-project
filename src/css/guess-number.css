@@ -17,7 +17,8 @@
 .divider {
     width: 576px;
     border-top: 1px solid #000;
-    margin: 36px auto
+    margin: 36px auto;
+    margin-bottom: 0;
 }
 
 .title {
