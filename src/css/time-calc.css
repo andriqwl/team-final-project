@@ -17,8 +17,7 @@
 .divider {
     width: 576px;
     border-top: 1px solid #000;
-    margin: 36px auto;
-    margin-bottom: 0;
+    margin: 36px auto
 }
 
 .title {
@@ -29,6 +28,7 @@
     line-height: 1;
     width: 326;
     height: 20px;
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
 .game-row {
@@ -76,6 +76,16 @@
     background-image: url('../img/search.png')
 }
 
+.vector {
+    margin: 0 0 0 57px;
+    width:100px;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
 .result {
     font-size: 12px;
     font-weight: 400;
@@ -83,4 +93,5 @@
     text-align: center;
     width: 224px;
     height: 15px;
+    margin: 0;
 }

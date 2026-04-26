@@ -1,6 +1,17 @@
 //Тут пишіть свій скрипт
 
 const root = document.getElementById('rock-paper-scissors-root');
+root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Наш "скляний" фон
+root.style.borderRadius = '30px';
+root.style.margin = '0px auto 0px auto';
+
+// root.style.padding = '36px 0'; // Внутрішні відступи
+root.style.paddingTop = '0';
+root.style.maxWidth = '1100px';
+root.style.backdropFilter = 'blur(10px)';
+root.style.display = 'flex';
+root.style.flexDirection = 'column';
+root.style.alignItems = 'center';
 const choices = ['rock', 'scissors', 'paper'];
 let playerScore = 0;
 let computerScore = 0;
@@ -32,12 +43,15 @@ container.style.fontFamily = 'var(--font-family)';
 container.style.maxWidth = '800px';
 container.style.margin = '0 auto';
 container.style.padding = '20px';
+container.style.paddingTop = '0';
+
 container.style.paddingBottom = '0';
 
 const title = document.createElement('h1');
 title.textContent = 'Камінь - ножиці - папір';
 title.style.textAlign = 'center';
 title.style.fontSize = '16px';
+// title.style.marginTop = '36px';
 title.style.marginBottom = '20px';
 container.appendChild(title);
 

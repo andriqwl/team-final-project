@@ -12,6 +12,7 @@
 /* @import url('./choose-scientist.css'); */
 @import url('./guess-number.css');
 @import url('./background.css');
+@import url('./time-calc.css');
 
 :root {
   --font-family: 'Montserrat Alternates', sans-serif;

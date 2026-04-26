@@ -175,4 +175,37 @@ subscribeBox.appendChild(noteText);
       openSubModal();
     });
   }
+
+  modal.appendChild(closeBtn);
+  modal.appendChild(title);
+  overlay.appendChild(modal);
+
+  function openSubModal() {
+    document.body.appendChild(overlay);
+    setTimeout(() => {
+      overlay.classList.add('active');
+      modal.classList.add('active');
+    }, 10);
+  }
+
+  function closeSubModal() {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+    setTimeout(() => overlay.remove(), 600);
+  }
+
+  const triggerBtn = document.getElementById('footer-sub-btn');
+
+  if (triggerBtn) {
+    triggerBtn.addEventListener('click', e => {
+      e.preventDefault();
+
+      if (!emailInput.value || !emailInput.value.includes('@')) {
+        alert('Введіть правильний email');
+        return;
+      }
+
+      openSubModal();
+    });
+  }
 })();
