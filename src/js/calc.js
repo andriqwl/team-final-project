@@ -8,8 +8,8 @@
   root.style.alignItems = 'center';
   root.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; // Білий прозорий фон
   root.style.borderRadius = '30px';
-  root.style.margin = '20px auto 50px auto';
-  root.style.paddingBottom = '40px';
+  root.style.margin = '36px auto 36px auto';
+  // root.style.paddingBottom = '40px';
   root.style.maxWidth = '1100px';
   root.style.backdropFilter = 'blur(10px)';
 
@@ -24,7 +24,7 @@
   title.style.fontWeight = '400';
   title.style.fontSize = '16px';
   title.style.color = '#000';
-  title.style.margin = '36px 0';
+  title.style.margin = '0 0 36px 0';
 
   const row = document.createElement('div');
   row.style.display = 'flex';
