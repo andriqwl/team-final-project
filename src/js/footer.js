@@ -1,10 +1,11 @@
+// 1. Створення структури футера
 const footerRoot = document.getElementById('footer-root');
 
 const footerElement = document.createElement('footer');
 footerElement.id = 'footer';
 footerElement.className = 'footer';
 
-// Додаємо стилі для центрування та обмеження ширини
+// Стилі футера
 footerElement.style.cssText = `
   max-width: 1100px;
   margin: 0 auto;
@@ -19,6 +20,7 @@ footerElement.style.cssText = `
 
 footerRoot.appendChild(footerElement);
 
+// 2. Логотип
 const logo = document.createElement('div');
 logo.className = 'footer-logo';
 footerElement.appendChild(logo);
@@ -27,6 +29,7 @@ const logoText = document.createElement('div');
 logoText.className = 'footer-logo-text';
 logo.appendChild(logoText);
 
+// 3. Контакти
 const contactsBox = document.createElement('div');
 contactsBox.className = 'footer-contacts';
 footerElement.appendChild(contactsBox);
@@ -43,10 +46,11 @@ contacts.forEach(text => {
   const p = document.createElement('p');
   p.textContent = text;
   p.className = 'footer-contact-item';
-  p.style.margin = '5px 0'; // Трохи відступу між контактами
+  p.style.margin = '5px 0';
   contactsBox.appendChild(p);
 });
 
+// 4. Секція підписки
 const subscribeBox = document.createElement('div');
 subscribeBox.className = 'footer-subscribe';
 footerElement.appendChild(subscribeBox);
@@ -63,7 +67,7 @@ emailInput.placeholder = 'Ваша ел. адреса';
 emailInput.className = 'footer-input';
 emailInput.style.padding = '10px 15px';
 emailInput.style.borderRadius = '20px';
-emailInput.style.border = '1px solid var(--border-color)';
+emailInput.style.border = '1px solid var(--border-color, #ccc)';
 formBox.appendChild(emailInput);
 
 const subscribeButton = document.createElement('button');
@@ -83,14 +87,16 @@ noteText.style.fontSize = '12px';
 noteText.style.marginTop = '10px';
 subscribeBox.appendChild(noteText);
 
-// --- Модальне вікно залишається без змін ---
+// 5. Логіка модального вікна (інкапсульована в IIFE)
 (function () {
+  // Завантаження шрифтів
   const fontLink = document.createElement('link');
   fontLink.href =
     'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap';
   fontLink.rel = 'stylesheet';
   document.head.appendChild(fontLink);
 
+  // Стилі модального вікна
   const styleEl = document.createElement('style');
   styleEl.textContent = `
       .sub-overlay {
@@ -111,11 +117,12 @@ subscribeBox.appendChild(noteText);
         transform: translateY(-100vh); transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
       .sub-window.active { transform: translateY(0); }
-      .sub-icon { position: absolute; opacity: 0.7; color: var(--text-primary, #000); }
+      .sub-icon { position: absolute; opacity: 0.7; color: var(--text-primary, #000); pointer-events: none; }
       .sub-close { position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 18px; color: var(--text-primary, #000); z-index: 10; }
     `;
   document.head.appendChild(styleEl);
 
+  // Створення елементів модалки
   const overlay = document.createElement('div');
   overlay.className = 'sub-overlay';
 
@@ -130,8 +137,9 @@ subscribeBox.appendChild(noteText);
   const modalTitle = document.createElement('h2');
   modalTitle.innerHTML = 'Дякую за підписку!';
   modalTitle.style.cssText =
-    'font-size: 20px; font-weight: 500; text-align: center;';
+    'font-size: 20px; font-weight: 500; text-align: center; margin: 0;';
 
+  // SVG іконки
   const iconPaths = [
     '<svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 13l2 2"/></svg>',
     '<svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/><path d="M13.5 13.5l3 3M16.5 13.5l-3 3"/></svg>',
@@ -143,8 +151,8 @@ subscribeBox.appendChild(noteText);
     const el = document.createElement('div');
     el.className = 'sub-icon';
     el.innerHTML = html;
-    if (i === 0) el.style.cssText += 'left: 10%; top: 25%;';
-    if (i === 1) el.style.cssText += 'right: 10%; top: 25%;';
+    if (i === 0) el.style.cssText += 'left: 10%; top: 20%;';
+    if (i === 1) el.style.cssText += 'right: 10%; top: 20%;';
     if (i === 2) el.style.cssText += 'left: 10%; bottom: 20%;';
     if (i === 3) el.style.cssText += 'right: 10%; bottom: 20%;';
     modal.appendChild(el);
@@ -154,6 +162,7 @@ subscribeBox.appendChild(noteText);
   modal.appendChild(modalTitle);
   overlay.appendChild(modal);
 
+  // Функції керування модалкою
   function openSubModal() {
     document.body.appendChild(overlay);
     setTimeout(() => {
@@ -165,47 +174,31 @@ subscribeBox.appendChild(noteText);
   function closeSubModal() {
     modal.classList.remove('active');
     overlay.classList.remove('active');
-    setTimeout(() => overlay.remove(), 600);
-  }
-
-  const triggerBtn = document.getElementById('footer-sub-btn');
-  if (triggerBtn) {
-    triggerBtn.addEventListener('click', e => {
-      e.preventDefault();
-      openSubModal();
-    });
-  }
-
-  modal.appendChild(closeBtn);
-  modal.appendChild(title);
-  overlay.appendChild(modal);
-
-  function openSubModal() {
-    document.body.appendChild(overlay);
     setTimeout(() => {
-      overlay.classList.add('active');
-      modal.classList.add('active');
-    }, 10);
+      if (overlay.parentNode) overlay.remove();
+    }, 600);
   }
 
-  function closeSubModal() {
-    modal.classList.remove('active');
-    overlay.classList.remove('active');
-    setTimeout(() => overlay.remove(), 600);
-  }
+  // Закриття при кліку на фон
+  overlay.onclick = e => {
+    if (e.target === overlay) closeSubModal();
+  };
 
+  // Обробник натискання кнопки
   const triggerBtn = document.getElementById('footer-sub-btn');
-
   if (triggerBtn) {
     triggerBtn.addEventListener('click', e => {
       e.preventDefault();
 
-      if (!emailInput.value || !emailInput.value.includes('@')) {
-        alert('Введіть правильний email');
+      // Проста валідація
+      const emailValue = emailInput.value.trim();
+      if (!emailValue || !emailValue.includes('@')) {
+        alert('Будь ласка, введіть коректну електронну адресу');
         return;
       }
 
       openSubModal();
+      emailInput.value = ''; // Очищення поля
     });
   }
 })();
